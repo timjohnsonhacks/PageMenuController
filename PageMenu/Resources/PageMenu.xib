@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10117"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PageMenu" customModule="PageMenu" customModuleProvider="target">
+            <connections>
+                <outlet property="pageContainerView" destination="5IY-NS-ubL" id="PRa-e1-W2Z"/>
+                <outlet property="titleContainerHeightConstraint" destination="o9u-6s-9yK" id="hoR-Sp-Vab"/>
+                <outlet property="titleContainerView" destination="e3W-aU-LNl" id="fCs-UG-Q1C"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Bk2-1G-TeM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5IY-NS-ubL">
+                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3W-aU-LNl">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="o9u-6s-9yK"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="5IY-NS-ubL" firstAttribute="top" secondItem="e3W-aU-LNl" secondAttribute="bottom" id="3OC-NJ-DLW"/>
+                <constraint firstAttribute="trailing" secondItem="5IY-NS-ubL" secondAttribute="trailing" id="Ast-ag-UJN"/>
+                <constraint firstItem="5IY-NS-ubL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FJH-W1-StZ"/>
+                <constraint firstAttribute="bottom" secondItem="5IY-NS-ubL" secondAttribute="bottom" id="I6b-Ds-yWV"/>
+                <constraint firstAttribute="trailing" secondItem="e3W-aU-LNl" secondAttribute="trailing" id="Lfz-iO-xEq"/>
+                <constraint firstItem="e3W-aU-LNl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VZg-Qg-SeT"/>
+                <constraint firstItem="e3W-aU-LNl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tMn-Lo-eSj"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

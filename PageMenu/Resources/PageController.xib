@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PageController" customModule="PagingControllerTest" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="SAo-ph-aqo" id="N5j-ci-rlE"/>
+                <outlet property="contentViewHeightConstraint" destination="R6s-Tt-lhS" id="ebe-Dj-afK"/>
+                <outlet property="contentViewWidthConstraint" destination="BAB-Fc-iyy" id="uaT-TT-din"/>
+                <outlet property="scrollView" destination="RN0-a1-2ha" id="thM-MX-UDe"/>
+                <outlet property="view" destination="iN0-l3-epB" id="vKw-ml-MGm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RN0-a1-2ha">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAo-ph-aqo">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="SAo-ph-aqo" secondAttribute="trailing" id="4Bf-kw-EjH"/>
+                        <constraint firstItem="SAo-ph-aqo" firstAttribute="leading" secondItem="RN0-a1-2ha" secondAttribute="leading" id="EAq-Tf-dcq"/>
+                        <constraint firstAttribute="bottom" secondItem="SAo-ph-aqo" secondAttribute="bottom" id="MAA-22-mwl"/>
+                        <constraint firstItem="SAo-ph-aqo" firstAttribute="top" secondItem="RN0-a1-2ha" secondAttribute="top" id="tKw-vv-M5g"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="2Rb-QL-Mh6"/>
+                    </connections>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="SAo-ph-aqo" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="BAB-Fc-iyy"/>
+                <constraint firstAttribute="bottom" secondItem="RN0-a1-2ha" secondAttribute="bottom" id="EvT-dm-7TR"/>
+                <constraint firstAttribute="trailing" secondItem="RN0-a1-2ha" secondAttribute="trailing" id="GLv-rX-qE9"/>
+                <constraint firstItem="RN0-a1-2ha" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JUD-OD-raX"/>
+                <constraint firstItem="SAo-ph-aqo" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="R6s-Tt-lhS"/>
+                <constraint firstItem="RN0-a1-2ha" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cAv-Z6-ztZ"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
