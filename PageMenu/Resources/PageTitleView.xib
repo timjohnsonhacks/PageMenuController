@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="Q8C-ps-xuC" customClass="PageTitleView" customModule="PagingControllerTest" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="Q8C-ps-xuC" customClass="PageTitleView" customModule="PageMenu" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="621" height="111"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>

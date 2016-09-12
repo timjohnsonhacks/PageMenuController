@@ -14,6 +14,10 @@
 		149C98553E90FF7BA896F695BFBFF98A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42E6B36692CB79785C933E25719FA6F /* SnapKit.framework */; };
 		1C2A601574FD7A1FB36A8FE7FF111DA8 /* PageController+Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2092EAAFB283493A072753DD476E9E4E /* PageController+Scrolling.swift */; };
 		1DFC8A074ED316EEFBA6C2BAB9C4569B /* View+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB547CA6D4862CCE70A4B51F1EABAE /* View+SnapKit.swift */; };
+		2258A42A1D876459006AC2F6 /* PageMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0700DED043EA789C79728BA4A6688877 /* PageMenu.xib */; };
+		2258A42B1D87646E006AC2F6 /* PageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632ABF72BA4812DB21795E797D86AA4C /* PageController.xib */; };
+		2258A42C1D876471006AC2F6 /* PageTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 560DADAA345D5D4AA4477D131D9F334C /* PageTitleView.xib */; };
+		2258A42D1D876473006AC2F6 /* PageTitleViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A190C40E8BA7A0D767E425B42BB998F7 /* PageTitleViewCell.xib */; };
 		2D21566BDCAC53FF84968558393AEC07 /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFB846E6A499B21514C1E298F56DE3B /* ConstraintAttributes.swift */; };
 		345F5D28EACBAB2705F7AB1BF3EF0225 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D1D10525428EE42117D40A1A64556D6 /* Foundation.framework */; };
 		3CDD4BBACFC02036EDC0F5A46E7350B2 /* PageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632ABF72BA4812DB21795E797D86AA4C /* PageController.xib */; };
@@ -579,7 +583,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2258A42D1D876473006AC2F6 /* PageTitleViewCell.xib in Resources */,
+				2258A42C1D876471006AC2F6 /* PageTitleView.xib in Resources */,
+				2258A42B1D87646E006AC2F6 /* PageController.xib in Resources */,
 				59C37FFCED0DB5B8C53B71EEBEE66871 /* PageMenu.bundle in Resources */,
+				2258A42A1D876459006AC2F6 /* PageMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
