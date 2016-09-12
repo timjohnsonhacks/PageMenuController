@@ -86,6 +86,10 @@ class PageController: UIViewController {
         
         self.contentViewWidthConstraint.active = (self.pageType == .Vertical)
         self.contentViewHeightConstraint.active = (self.pageType == .Horizontal)
+        
+        self.scrollView.bounces = true
+        self.scrollView.alwaysBounceVertical = (self.pageType == .Vertical)
+        self.scrollView.alwaysBounceHorizontal = (self.pageType == .Horizontal)
     }
     
     private func setupViewControllers() {
