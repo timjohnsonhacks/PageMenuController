@@ -1,0 +1,16 @@
+PODS:
+  - PageMenu (0.1.0)
+
+DEPENDENCIES:
+  - PageMenu (from `../`)
+
+EXTERNAL SOURCES:
+  PageMenu:
+    :path: ../
+
+SPEC CHECKSUMS:
+  PageMenu: f29be77d0c1b3cc5ab64c52d2acd47cb55d8b704
+
+PODFILE CHECKSUM: 123a8006bf504e67cd7729966c65c4b1d421a6fd
+
+COCOAPODS: 1.0.1

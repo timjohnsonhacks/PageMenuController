@@ -1,0 +1,22 @@
+{
+  "name": "PageMenu",
+  "version": "0.1.0",
+  "summary": "A short description of PageMenu.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/PageMenu",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Tim Johnson": "timj@kamcord.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/PageMenu.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "PageMenu/Classes/**/*"
+}
