@@ -17,12 +17,12 @@ PageMenu is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "PageMenu"
+pod "PageMenuController"
 ```
 
 ## Author
 
-Tim Johnson, timj@kamcord.com
+Tim Johnson, tpjohnson3691@gmail.com
 
 ## License
 
