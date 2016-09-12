@@ -29,7 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A8096FCF997D99D0319E929 /* PageMenu.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PageMenu.podspec; path = ../PageMenu.podspec; sourceTree = "<group>"; };
+		0A8096FCF997D99D0319E929 /* PageMenuController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PageMenuController.podspec; path = ../PageMenuController.podspec; sourceTree = "<group>"; };
 		224F08621D874353006FCA3C /* ColoredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredViewController.swift; sourceTree = "<group>"; };
 		469727D2C3A633B75AE47D5E /* Pods_PageMenu_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PageMenu_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C70C93A6EB8F24BC02D712 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				0A8096FCF997D99D0319E929 /* PageMenu.podspec */,
+				0A8096FCF997D99D0319E929 /* PageMenuController.podspec */,
 				8DA4A1A54C30690CB949B13D /* README.md */,
 				49C70C93A6EB8F24BC02D712 /* LICENSE */,
 			);

@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = 'PageMenu'
+  s.name             = 'PageMenuController'
   s.version          = '0.1.0'
   s.summary          = 'An Android like navigation system, with a segmented control at the top, with the ability to scroll between view controllers fluidly.'
 
@@ -14,10 +14,10 @@ This library allows for the creation of an Android like navigation menu on iOS. 
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'PageMenu/Classes/**/*'
+  s.source_files = 'PageMenuController/Classes/**/*'
   
   s.resource_bundles = {
-    'PageMenu' => ['PageMenu/Resources/**/*.xib']
+    'PageMenuController' => ['PageMenuController/Resources/**/*.xib']
   }
 
   s.dependency 'SnapKit', '0.21.0'

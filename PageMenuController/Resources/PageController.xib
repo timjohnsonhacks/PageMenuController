@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PageController" customModule="PageMenu" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PageController" customModule="PageMenuController" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="SAo-ph-aqo" id="N5j-ci-rlE"/>
                 <outlet property="contentViewHeightConstraint" destination="R6s-Tt-lhS" id="ebe-Dj-afK"/>

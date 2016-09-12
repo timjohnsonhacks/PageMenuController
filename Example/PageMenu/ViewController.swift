@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PageMenu
+import PageMenuController
 
 class ViewController: UIViewController {
 

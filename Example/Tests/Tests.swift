@@ -1,6 +1,6 @@
 import UIKit
 import XCTest
-import PageMenu
+import PageMenuController
 
 class Tests: XCTestCase {
     

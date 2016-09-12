@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## PageMenu
+## PageMenuController
 
 Copyright (c) 2016 Tim Johnson <timj@kamcord.com>
 
