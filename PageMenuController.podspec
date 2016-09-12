@@ -7,10 +7,10 @@ Pod::Spec.new do |s|
 This library allows for the creation of an Android like navigation menu on iOS. It implements a basic swipe to scroll between view controllers, with the titles of the view controllers displaying in a a bar above the content.
                        DESC
 
-  s.homepage         = 'https://github.com/tpj3duke/PageMenu'
+  s.homepage         = 'https://github.com/tpj3duke/PageMenuController'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Tim Johnson' => 'tpjohnson3691@gmail.com' }
-  s.source           = { :git => 'https://github.com/tpj3duke/PageMenu.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/tpj3duke/PageMenuController.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
