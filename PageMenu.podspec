@@ -18,10 +18,10 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+This library allows for the creation of an Android like navigation menu on iOS. It implements a basic swipe to scroll between view controllers, with the titles of the view controllers displaying in a a bar above the content.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/PageMenu'
+  s.homepage         = 'https://github.com/tpj3duke/PageMenu'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Tim Johnson' => 'tpjohnson3691@gmail.com' }
