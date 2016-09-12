@@ -96,7 +96,7 @@ class PageTitleView: UIView {
     
     private func setupCollectionView() {
         
-        self.collectionView.registerNib(PageTitleViewCell.nib, forCellWithReuseIdentifier: PageTitleViewCell.nibName)
+        self.collectionView.registerNib(PageTitleViewCell.pmc_nib, forCellWithReuseIdentifier: PageTitleViewCell.pmc_nibName)
     }
     
     private func updateInterfaceElements() {
@@ -118,11 +118,14 @@ class PageTitleView: UIView {
     
     func didScrollToOffset(offset: CGFloat, contentSize: CGFloat) {
         
-        let sizeRatio = CGRectGetWidth(self.frame) / contentSize
-        let relativeOffset = offset * sizeRatio
-        
-        self.selectionIndicatorLeadingConstraint.constant = relativeOffset
-        self.updateSelectedContent()
+        if contentSize > 0 {
+         
+            let sizeRatio = CGRectGetWidth(self.frame) / contentSize
+            let relativeOffset = offset * sizeRatio
+            
+            self.selectionIndicatorLeadingConstraint.constant = relativeOffset
+            self.updateSelectedContent()
+        }
     }
     
     private func updateSelectedContent() {
@@ -146,7 +149,7 @@ extension PageTitleView: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let pageTitleCell = collectionView.dequeueReusableCellWithReuseIdentifier(PageTitleViewCell.nibName, forIndexPath: indexPath) as! PageTitleViewCell
+        let pageTitleCell = collectionView.dequeueReusableCellWithReuseIdentifier(PageTitleViewCell.pmc_nibName, forIndexPath: indexPath) as! PageTitleViewCell
         
         let title = self.titles?[safe: indexPath.row]
         pageTitleCell.title = title

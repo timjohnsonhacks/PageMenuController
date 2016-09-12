@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+private struct Constants {
+    
+    static let DefaultTitleHeight: CGFloat = 64
+}
+
 public class PageMenuController: UIViewController {
     
     @IBOutlet private weak var titleContainerView: UIView!
@@ -18,16 +23,11 @@ public class PageMenuController: UIViewController {
     private var pageTitleView: PageTitleView?
     private var pageController: PageController?
     
-    public var titleContainerHeight: CGFloat? {
+    public var titleContainerHeight: CGFloat = Constants.DefaultTitleHeight {
         
         didSet {
-        
-            guard let height = titleContainerHeight else {
-                
-                return
-            }
             
-            self.titleContainerHeightConstraint.constant = height
+            self.titleContainerHeightConstraint.constant = titleContainerHeight
         }
     }
     
@@ -41,7 +41,7 @@ public class PageMenuController: UIViewController {
     }
     
     public init() {
-        super.init(nibName: "PageMenuController", bundle: NSBundle.pageMenuBundle())
+        super.init(nibName: "PageMenuController", bundle: NSBundle.pmc_pageMenuBundle())
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -57,7 +57,7 @@ public class PageMenuController: UIViewController {
     
     private func addPageTitleView() {
         
-        if let pageTitleView = PageTitleView.viewFromNib() {
+        if let pageTitleView = PageTitleView.pmc_viewFromNib() {
             
             self.titleContainerView.addSubview(pageTitleView)
             
@@ -77,7 +77,7 @@ public class PageMenuController: UIViewController {
         
         pageController.delegate = self
         pageController.viewControllers = self.viewControllers
-        self.addChildViewController(pageController, inView: self.pageContainerView)
+        self.pmc_addChildViewController(pageController, inView: self.pageContainerView)
         
         pageController.view.snp_makeConstraints { (make) in
             

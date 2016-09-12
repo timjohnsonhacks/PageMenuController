@@ -55,7 +55,7 @@ class PageController: UIViewController {
     }
     
     init() {
-        super.init(nibName: "PageController", bundle: NSBundle.pageMenuBundle())
+        super.init(nibName: "PageController", bundle: NSBundle.pmc_pageMenuBundle())
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -78,7 +78,7 @@ class PageController: UIViewController {
         
         viewControllers.forEach({ (viewController: UIViewController) in
             
-            self.removeChildViewController(viewController)
+            self.pmc_removeChildViewControllerFromView(viewController)
         })
     }
     
@@ -100,7 +100,7 @@ class PageController: UIViewController {
         viewControllers.forEach({ (viewController: UIViewController) in
             
             viewController.view.translatesAutoresizingMaskIntoConstraints = false
-            self.addChildViewController(viewController, inView: contentView)
+            self.pmc_addChildViewController(viewController, inView: contentView)
             
             viewController.view.snp_makeConstraints(closure: { (make) in
                 

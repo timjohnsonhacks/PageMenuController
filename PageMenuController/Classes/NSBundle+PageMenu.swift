@@ -10,7 +10,7 @@ import Foundation
 
 extension NSBundle {
     
-    class func pageMenuBundle() -> NSBundle? {
+    class func pmc_pageMenuBundle() -> NSBundle? {
         
         return NSBundle(forClass: PageMenuController.classForCoder())
     }

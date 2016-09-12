@@ -11,12 +11,12 @@ import UIKit
 
 extension UIView {
     
-    class func viewFromNib(nibNameOrNil: String? = nil) -> Self? {
+    class func pmc_viewFromNib(nibNameOrNil: String? = nil) -> Self? {
         
-        return self.viewFromNib(nibNameOrNil, type: self)
+        return self.pmc_viewFromNib(nibNameOrNil, type: self)
     }
     
-    class func viewFromNib<T : UIView>(nibNameOrNil: String? = nil, type: T.Type) -> T? {
+    class func pmc_viewFromNib<T : UIView>(nibNameOrNil: String? = nil, type: T.Type) -> T? {
         
         var view: T?
         let name: String
@@ -26,10 +26,10 @@ extension UIView {
             name = nibName
         } else {
             
-            name = self.nibName
+            name = self.pmc_nibName
         }
         
-        if let nibViews = NSBundle.pageMenuBundle()?.loadNibNamed(name, owner: nil, options: nil) {
+        if let nibViews = NSBundle.pmc_pageMenuBundle()?.loadNibNamed(name, owner: nil, options: nil) {
          
             for nibView in nibViews {
                 
@@ -43,17 +43,17 @@ extension UIView {
         return view
     }
     
-    class var nibName: String {
+    class var pmc_nibName: String {
         
         let name = "\(self)".componentsSeparatedByString(".").first ?? ""
         return name
     }
     
-    class var nib: UINib? {
+    class var pmc_nib: UINib? {
         
-        if let _ = NSBundle.pageMenuBundle()?.pathForResource(self.nibName, ofType: "nib") {
+        if let _ = NSBundle.pmc_pageMenuBundle()?.pathForResource(self.pmc_nibName, ofType: "nib") {
             
-            return UINib(nibName: self.nibName, bundle: NSBundle.pageMenuBundle())
+            return UINib(nibName: self.pmc_nibName, bundle: NSBundle.pmc_pageMenuBundle())
         } else {
             
             return nil
