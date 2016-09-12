@@ -1,5 +1,7 @@
 PODS:
-  - PageMenu (0.1.0)
+  - PageMenu (0.1.0):
+    - SnapKit (= 0.21.0)
+  - SnapKit (0.21.0)
 
 DEPENDENCIES:
   - PageMenu (from `../`)
@@ -9,7 +11,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  PageMenu: f29be77d0c1b3cc5ab64c52d2acd47cb55d8b704
+  PageMenu: 6dd9ce69676dec4607d40e96b4e30d36c512a1bb
+  SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
 
 PODFILE CHECKSUM: 123a8006bf504e67cd7729966c65c4b1d421a6fd
 

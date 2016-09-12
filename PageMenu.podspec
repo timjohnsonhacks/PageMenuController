@@ -32,11 +32,11 @@ This library allows for the creation of an Android like navigation menu on iOS. 
 
   s.source_files = 'PageMenu/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'PageMenu' => ['PageMenu/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'PageMenu' => ['PageMenu/Resources/**/*.xib']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'SnapKit', '0.21.0'
 end
