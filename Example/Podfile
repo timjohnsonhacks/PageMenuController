@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'PageMenu_Example' do
+  pod 'PageMenu', :path => '../'
+
+  target 'PageMenu_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
