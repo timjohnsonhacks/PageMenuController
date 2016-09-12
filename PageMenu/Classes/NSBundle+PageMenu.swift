@@ -12,6 +12,6 @@ extension NSBundle {
     
     class func pageMenuBundle() -> NSBundle? {
         
-        return NSBundle(forClass: PageMenu.classForCoder())
+        return NSBundle(forClass: PageMenuController.classForCoder())
     }
 }

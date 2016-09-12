@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     
     func addPageController() {
         
-        let pageMenu = PageMenu()
+        let pageMenuController = PageMenuController()
         
         let blueViewController = ColoredViewController()
         blueViewController.title = "BLUE"
@@ -37,13 +37,13 @@ class ViewController: UIViewController {
         purpleViewController.title = "PURPLE"
         purpleViewController.color = UIColor.purpleColor()
         
-        pageMenu.viewControllers = [blueViewController, redViewController, orangeViewController, purpleViewController]
+        pageMenuController.viewControllers = [blueViewController, redViewController, orangeViewController, purpleViewController]
         
-        self.addChildViewController(pageMenu)
-        self.view.addSubview(pageMenu.view)
-        pageMenu.didMoveToParentViewController(self)
+        self.addChildViewController(pageMenuController)
+        self.view.addSubview(pageMenuController.view)
+        pageMenuController.didMoveToParentViewController(self)
         
-        pageMenu.view.snp_makeConstraints { (make) in
+        pageMenuController.view.snp_makeConstraints { (make) in
             
             make.edges.equalTo(self.view)
         }

@@ -1,5 +1,5 @@
 //
-//  PageMenu.swift
+//  PageMenuController.swift
 //  PagingControllerTest
 //
 //  Created by Tim Johnson on 9/9/16.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class PageMenu: UIViewController {
+public class PageMenuController: UIViewController {
     
     @IBOutlet private weak var titleContainerView: UIView!
     @IBOutlet private weak var pageContainerView: UIView!
@@ -94,7 +94,7 @@ public class PageMenu: UIViewController {
     }
 }
 
-extension PageMenu: PageControllerDelegate {
+extension PageMenuController: PageControllerDelegate {
     
     func pagingScrollViewDidScroll(scrollView: UIScrollView) {
         
