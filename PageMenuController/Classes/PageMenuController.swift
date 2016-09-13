@@ -12,6 +12,8 @@ import UIKit
 private struct Constants {
     
     static let DefaultTitleHeight: CGFloat = 64
+    
+    static let DefaultSeparatorHeight: CGFloat = 1.0 / UIScreen.mainScreen().scale
 }
 
 public protocol PageMenuControllerDelegate: class {
@@ -38,7 +40,15 @@ public class PageMenuController: UIViewController {
         
         didSet {
             
-            self.titleContainerHeightConstraint.constant = titleContainerHeight
+            self.updateTitleViewHeight()
+        }
+    }
+    
+    public var hidesSeparator: Bool = false {
+        
+        didSet {
+            
+            self.updateSeparatorHeight()
         }
     }
     
@@ -46,7 +56,10 @@ public class PageMenuController: UIViewController {
         
         didSet {
             
-            self.separatorView.backgroundColor = separatorColor
+            if self.separatorView != nil {
+             
+                self.separatorView.backgroundColor = separatorColor
+            }
         }
     }
     
@@ -54,55 +67,55 @@ public class PageMenuController: UIViewController {
         
         didSet {
             
-            self.pageTitleView?.selectionIndicatorColor = selectionIndicatorColor
+            self.updateTitleViewInterface()
         }
     }
     
-    var selectedBackgroundColor: UIColor = UIColor.lightGrayColor() {
+    public var selectedBackgroundColor: UIColor = UIColor.lightGrayColor() {
         
         didSet {
             
-            self.pageTitleView?.selectedBackgroundColor = selectedBackgroundColor
+            self.updateTitleViewInterface()
         }
     }
     
-    var unselectedBackgroundColor: UIColor = UIColor.whiteColor() {
+    public var unselectedBackgroundColor: UIColor = UIColor.whiteColor() {
         
         didSet {
             
-            self.pageTitleView?.unselectedBackgroundColor = unselectedBackgroundColor
+            self.updateTitleViewInterface()
         }
     }
     
-    var selectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
+    public var selectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
         
         didSet {
             
-            self.pageTitleView?.selectedFont = selectedFont
+            self.updateTitleViewInterface()
         }
     }
     
-    var unselectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
+    public var unselectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
         
         didSet {
             
-            self.pageTitleView?.unselectedFont = unselectedFont
+            self.updateTitleViewInterface()
         }
     }
     
-    var selectedFontColor: UIColor = UIColor.blackColor() {
+    public var selectedFontColor: UIColor = UIColor.blackColor() {
         
         didSet {
             
-            self.pageTitleView?.selectedFontColor = selectedFontColor
+            self.updateTitleViewInterface()
         }
     }
     
-    var unselectedFontColor: UIColor = UIColor.blackColor() {
+    public var unselectedFontColor: UIColor = UIColor.blackColor() {
         
         didSet {
             
-            self.pageTitleView?.unselectedFontColor = unselectedFontColor
+            self.updateTitleViewInterface()
         }
     }
     
@@ -136,15 +149,33 @@ public class PageMenuController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupSeparatorView()
+        self.initializeInterface()
         self.addPageTitleView()
         self.addPageController()
     }
     
-    private func setupSeparatorView() {
+    private func initializeInterface() {
         
-        self.separatorViewHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
+        self.updateTitleViewHeight()
+        
         self.separatorView.backgroundColor = self.separatorColor
+        self.updateSeparatorHeight()
+    }
+    
+    private func updateTitleViewHeight() {
+        
+        if self.titleContainerHeightConstraint != nil {
+            
+            self.titleContainerHeightConstraint.constant = titleContainerHeight
+        }
+    }
+    
+    private func updateSeparatorHeight() {
+        
+        if self.separatorViewHeightConstraint != nil {
+         
+            self.separatorViewHeightConstraint.constant = hidesSeparator ? 0.0 : Constants.DefaultSeparatorHeight
+        }
     }
     
     private func addPageTitleView() {
@@ -161,6 +192,7 @@ public class PageMenuController: UIViewController {
             
             self.pageTitleView = pageTitleView
             self.updateTitles()
+            self.updateTitleViewInterface()
         }
     }
     
@@ -178,6 +210,17 @@ public class PageMenuController: UIViewController {
         }
         
         self.pageController = pageController
+    }
+    
+    private func updateTitleViewInterface() {
+        
+        self.pageTitleView?.selectionIndicatorColor = self.selectionIndicatorColor
+        self.pageTitleView?.selectedBackgroundColor = self.selectedBackgroundColor
+        self.pageTitleView?.unselectedBackgroundColor = self.unselectedBackgroundColor
+        self.pageTitleView?.selectedFont = self.selectedFont
+        self.pageTitleView?.unselectedFont = self.unselectedFont
+        self.pageTitleView?.selectedFontColor = self.selectedFontColor
+        self.pageTitleView?.unselectedFontColor = self.unselectedFontColor
     }
     
     private func updateTitles() {
