@@ -9,12 +9,19 @@
 import Foundation
 import UIKit
 
+protocol PageTitleViewDelegate: class {
+    
+    func pageTitleViewDidSelectItemAtIndexPath(indexPath: NSIndexPath)
+}
+
 class PageTitleView: UIView {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var selectionIndicator: UIView!
     @IBOutlet private weak var selectionIndicatorWidthConstraint: NSLayoutConstraint!
     @IBOutlet private weak var selectionIndicatorLeadingConstraint: NSLayoutConstraint!
+    
+    weak var delegate: PageTitleViewDelegate?
     
     var selectionIndicatorColor: UIColor = UIColor.darkGrayColor() {
         
@@ -96,6 +103,7 @@ class PageTitleView: UIView {
     
     private func setupCollectionView() {
         
+        self.collectionView.allowsMultipleSelection = true
         self.collectionView.registerNib(PageTitleViewCell.pmc_nib, forCellWithReuseIdentifier: PageTitleViewCell.pmc_nibName)
     }
     
@@ -134,6 +142,7 @@ class PageTitleView: UIView {
         if self.collectionView.numberOfSections() > indexPath.section && self.collectionView.numberOfItemsInSection(0) > indexPath.row {
             
             self.collectionView.reloadItemsAtIndexPaths([indexPath])
+            self.updateSelectedContent()
         }
     }
     
@@ -144,7 +153,14 @@ class PageTitleView: UIView {
         let selectedPoint = CGPointMake(selectionOffset, 0)
         if let indexPath = self.collectionView.indexPathForItemAtPoint(selectedPoint) {
             
-            self.collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: .CenteredVertically)
+            if let selectedIndexPath = self.collectionView.indexPathsForSelectedItems()?.last where selectedIndexPath != indexPath {
+                
+                self.collectionView.deselectItemAtIndexPath(selectedIndexPath, animated: false)
+                self.collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: .CenteredVertically)
+            } else if self.collectionView.indexPathsForSelectedItems()?.last == nil {
+                
+                self.collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: .CenteredVertically)
+            }
         }
     }
 }
@@ -186,5 +202,17 @@ extension PageTitleView: UICollectionViewDelegateFlowLayout {
         let cellWidth = width / CGFloat(self.titles?.count ?? 1)
         
         return CGSizeMake(cellWidth, height)
+    }
+    
+    func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        return false
+    }
+    
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        self.delegate?.pageTitleViewDidSelectItemAtIndexPath(indexPath)
+        
+        return false
     }
 }

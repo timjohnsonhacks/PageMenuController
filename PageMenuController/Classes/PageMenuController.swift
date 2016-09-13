@@ -78,6 +78,7 @@ public class PageMenuController: UIViewController {
         
         if let pageTitleView = PageTitleView.pmc_viewFromNib() {
             
+            pageTitleView.delegate = self
             self.titleContainerView.addSubview(pageTitleView)
             
             pageTitleView.snp_makeConstraints(closure: { (make) in
@@ -125,5 +126,13 @@ extension PageMenuController: PageControllerDelegate {
     func pagingScrollViewDidSelectViewController(controller: UIViewController, atIndex index: Int) {
         
         self.delegate?.pageMenuDidSelectController(controller, atIndex: index)
+    }
+}
+
+extension PageMenuController: PageTitleViewDelegate {
+    
+    func pageTitleViewDidSelectItemAtIndexPath(indexPath: NSIndexPath) {
+        
+        self.pageController?.scrollToItemAtIndexPath(indexPath)
     }
 }

@@ -168,4 +168,14 @@ class PageController: UIViewController {
             previousController = viewController
         })
     }
+    
+    func scrollToItemAtIndexPath(indexPath: NSIndexPath) {
+        
+        let offset = CGFloat(indexPath.row) * CGRectGetWidth(self.scrollView.frame)
+        
+        let contentOffset = CGPointMake(offset, 0)
+        
+        self.beginAppearanceTransitionForScrollView(self.scrollView, targetOffset: offset)
+        self.scrollView.setContentOffset(contentOffset, animated: true)
+    }
 }

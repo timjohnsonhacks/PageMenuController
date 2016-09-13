@@ -31,7 +31,22 @@ extension PageController: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
-        let currentIndex = self.calculateIndex(targetContentOffset.memory.x, scrollView: scrollView)
+        self.beginAppearanceTransitionForScrollView(scrollView, targetOffset: targetContentOffset.memory.x)
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        
+        self.endAppearanceTransitionsForScrollView(scrollView)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        
+        self.endAppearanceTransitionsForScrollView(scrollView)
+    }
+    
+    func beginAppearanceTransitionForScrollView(scrollView: UIScrollView, targetOffset: CGFloat) {
+        
+        let currentIndex = self.calculateIndex(targetOffset, scrollView: scrollView)
         
         if let currentViewController = self.viewControllers?[safe: currentIndex],
             previousController = self.viewControllers?[safe: self.selectedIndex] where currentViewController != previousController {
@@ -44,7 +59,7 @@ extension PageController: UIScrollViewDelegate {
         }
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    private func endAppearanceTransitionsForScrollView(scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset.x
         let currentIndex = self.calculateIndex(offset, scrollView: scrollView)
