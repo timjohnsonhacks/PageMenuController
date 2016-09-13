@@ -19,6 +19,7 @@ enum PageType {
 protocol PageControllerDelegate: class {
     
     func pagingScrollViewDidScroll(scrollView: UIScrollView)
+    func pagingScrollViewDidSelectViewController(controller: UIViewController, atIndex index: Int)
 }
 
 class PageController: UIViewController {
@@ -86,6 +87,7 @@ class PageController: UIViewController {
         
         viewControllers.forEach({ (viewController: UIViewController) in
             
+            
             self.pmc_removeChildViewControllerFromView(viewController)
         })
     }
@@ -110,6 +112,7 @@ class PageController: UIViewController {
         
         var previousController: UIViewController? = nil
         viewControllers.forEach({ (viewController: UIViewController) in
+            
             
             viewController.automaticallyAdjustsScrollViewInsets = false
             viewController.view.translatesAutoresizingMaskIntoConstraints = false

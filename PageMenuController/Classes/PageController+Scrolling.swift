@@ -59,6 +59,8 @@ extension PageController: UIScrollViewDelegate {
             self.disappearingViewController = nil
             
             self.selectedIndex = currentIndex
+            
+            self.delegate?.pagingScrollViewDidSelectViewController(currentViewController, atIndex: currentIndex)
         }
     }
     

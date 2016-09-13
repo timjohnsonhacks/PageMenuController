@@ -128,6 +128,15 @@ class PageTitleView: UIView {
         }
     }
     
+    func updateCellAtIndex(index: Int) {
+
+        let indexPath = NSIndexPath(forItem: index, inSection: 0)
+        if self.collectionView.numberOfSections() > indexPath.section && self.collectionView.numberOfItemsInSection(0) > indexPath.row {
+            
+            self.collectionView.reloadItemsAtIndexPaths([indexPath])
+        }
+    }
+    
     private func updateSelectedContent() {
         
         let relativeOffset = self.selectionIndicatorLeadingConstraint.constant

@@ -14,14 +14,23 @@ private struct Constants {
     static let DefaultTitleHeight: CGFloat = 64
 }
 
+public protocol PageMenuControllerDelegate: class {
+    
+    func pageMenuDidSelectController(controller: UIViewController, atIndex index: Int)
+}
+
 public class PageMenuController: UIViewController {
     
     @IBOutlet private weak var titleContainerView: UIView!
     @IBOutlet private weak var pageContainerView: UIView!
     @IBOutlet private weak var titleContainerHeightConstraint: NSLayoutConstraint!
     
-    private var pageTitleView: PageTitleView?
+    internal var pageTitleView: PageTitleView?
     private var pageController: PageController?
+    
+    internal var KVOContext: UInt8 = 1
+    
+    public var delegate: PageMenuControllerDelegate?
     
     public var titleContainerHeight: CGFloat = Constants.DefaultTitleHeight {
         
@@ -35,8 +44,18 @@ public class PageMenuController: UIViewController {
         
         didSet {
             
+            self.updateObserversForViewControllers(self.pageController?.viewControllers, addObservers: viewControllers)
+            
             self.pageController?.viewControllers = viewControllers
             self.updateTitles()
+        }
+    }
+    
+    public var selectedIndex: Int {
+        
+        get {
+            
+            return self.pageController?.selectedIndex ?? 0
         }
     }
     
@@ -101,5 +120,10 @@ extension PageMenuController: PageControllerDelegate {
     func pagingScrollViewDidScroll(scrollView: UIScrollView) {
         
         self.pageTitleView?.didScrollToOffset(scrollView.contentOffset.x, contentSize: scrollView.contentSize.width)
+    }
+    
+    func pagingScrollViewDidSelectViewController(controller: UIViewController, atIndex index: Int) {
+        
+        self.delegate?.pageMenuDidSelectController(controller, atIndex: index)
     }
 }
