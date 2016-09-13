@@ -24,6 +24,8 @@ public class PageMenuController: UIViewController {
     @IBOutlet private weak var titleContainerView: UIView!
     @IBOutlet private weak var pageContainerView: UIView!
     @IBOutlet private weak var titleContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var separatorViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var separatorView: UIView!
     
     internal var pageTitleView: PageTitleView?
     private var pageController: PageController?
@@ -37,6 +39,70 @@ public class PageMenuController: UIViewController {
         didSet {
             
             self.titleContainerHeightConstraint.constant = titleContainerHeight
+        }
+    }
+    
+    public var separatorColor: UIColor = UIColor.blackColor() {
+        
+        didSet {
+            
+            self.separatorView.backgroundColor = separatorColor
+        }
+    }
+    
+    public var selectionIndicatorColor: UIColor = UIColor.darkGrayColor() {
+        
+        didSet {
+            
+            self.pageTitleView?.selectionIndicatorColor = selectionIndicatorColor
+        }
+    }
+    
+    var selectedBackgroundColor: UIColor = UIColor.lightGrayColor() {
+        
+        didSet {
+            
+            self.pageTitleView?.selectedBackgroundColor = selectedBackgroundColor
+        }
+    }
+    
+    var unselectedBackgroundColor: UIColor = UIColor.whiteColor() {
+        
+        didSet {
+            
+            self.pageTitleView?.unselectedBackgroundColor = unselectedBackgroundColor
+        }
+    }
+    
+    var selectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
+        
+        didSet {
+            
+            self.pageTitleView?.selectedFont = selectedFont
+        }
+    }
+    
+    var unselectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
+        
+        didSet {
+            
+            self.pageTitleView?.unselectedFont = unselectedFont
+        }
+    }
+    
+    var selectedFontColor: UIColor = UIColor.blackColor() {
+        
+        didSet {
+            
+            self.pageTitleView?.selectedFontColor = selectedFontColor
+        }
+    }
+    
+    var unselectedFontColor: UIColor = UIColor.blackColor() {
+        
+        didSet {
+            
+            self.pageTitleView?.unselectedFontColor = unselectedFontColor
         }
     }
     
@@ -70,8 +136,15 @@ public class PageMenuController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupSeparatorView()
         self.addPageTitleView()
         self.addPageController()
+    }
+    
+    private func setupSeparatorView() {
+        
+        self.separatorViewHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
+        self.separatorView.backgroundColor = self.separatorColor
     }
     
     private func addPageTitleView() {
