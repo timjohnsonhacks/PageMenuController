@@ -29,7 +29,7 @@ extension UIView {
             name = self.pmc_nibName
         }
         
-        if let nibViews = NSBundle.pmc_pageMenuBundle()?.loadNibNamed(name, owner: nil, options: nil) {
+        if let nibViews = NSBundle.pmc_pageMenuResourceBundle()?.loadNibNamed(name, owner: nil, options: nil) {
          
             for nibView in nibViews {
                 
@@ -51,9 +51,9 @@ extension UIView {
     
     class var pmc_nib: UINib? {
         
-        if let _ = NSBundle.pmc_pageMenuBundle()?.pathForResource(self.pmc_nibName, ofType: "nib") {
+        if let _ = NSBundle.pmc_pageMenuResourceBundle()?.pathForResource(self.pmc_nibName, ofType: "nib") {
             
-            return UINib(nibName: self.pmc_nibName, bundle: NSBundle.pmc_pageMenuBundle())
+            return UINib(nibName: self.pmc_nibName, bundle: NSBundle.pmc_pageMenuResourceBundle())
         } else {
             
             return nil

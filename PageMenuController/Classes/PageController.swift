@@ -56,7 +56,7 @@ class PageController: UIViewController {
     }
     
     init() {
-        super.init(nibName: "PageController", bundle: NSBundle.pmc_pageMenuBundle())
+        super.init(nibName: "PageController", bundle: NSBundle.pmc_pageMenuResourceBundle())
     }
     
     required init?(coder aDecoder: NSCoder) {
