@@ -57,6 +57,7 @@ class PageTitleViewCell: UICollectionViewCell {
         
         didSet {
             
+            self.updateHighlightedTextColor()
             self.updateInterfaceElements()
         }
     }
@@ -66,6 +67,15 @@ class PageTitleViewCell: UICollectionViewCell {
         didSet {
             
             self.updateInterfaceElements()
+            self.titleLabel.highlighted = false
+        }
+    }
+    
+    override var highlighted: Bool {
+        
+        didSet {
+            
+            self.titleLabel.highlighted = highlighted && !self.selected
         }
     }
     
@@ -75,6 +85,18 @@ class PageTitleViewCell: UICollectionViewCell {
             
             self.titleLabel.text = title
         }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.updateHighlightedTextColor()
+        self.updateInterfaceElements()
+    }
+    
+    private func updateHighlightedTextColor() {
+        
+        self.titleLabel.highlightedTextColor = self.unselectedFontColor.colorWithAlphaComponent(0.3)
     }
     
     private func updateInterfaceElements() {

@@ -111,16 +111,15 @@ class PageTitleView: UIView {
         
         self.selectionIndicator.backgroundColor = self.selectionIndicatorColor
         
-        if let selectedIndexPath = self.collectionView.indexPathsForSelectedItems()?.last,
-            selectedCell = self.collectionView.cellForItemAtIndexPath(selectedIndexPath) as? PageTitleViewCell {
+        for case let cell as PageTitleViewCell in self.collectionView.visibleCells() {
+             
+            cell.selectedFont = self.selectedFont
+            cell.selectedFontColor = self.selectedFontColor
+            cell.selectedBackgroundColor = self.selectedBackgroundColor
             
-            selectedCell.selectedFont = self.selectedFont
-            selectedCell.selectedFontColor = self.selectedFontColor
-            selectedCell.selectedBackgroundColor = self.selectedBackgroundColor
-            
-            selectedCell.unselectedFont = self.unselectedFont
-            selectedCell.unselectedFontColor = self.unselectedFontColor
-            selectedCell.unselectedBackgroundColor = self.unselectedBackgroundColor
+            cell.unselectedFont = self.unselectedFont
+            cell.unselectedFontColor = self.unselectedFontColor
+            cell.unselectedBackgroundColor = self.unselectedBackgroundColor
         }
     }
     
