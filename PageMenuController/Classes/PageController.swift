@@ -65,8 +65,16 @@ class PageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         self.adjustForPageType()
         self.setupViewControllers()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.scrollView.contentInset = UIEdgeInsetsZero
     }
     
     private func removeViewControllers() {
@@ -103,6 +111,7 @@ class PageController: UIViewController {
         var previousController: UIViewController? = nil
         viewControllers.forEach({ (viewController: UIViewController) in
             
+            viewController.automaticallyAdjustsScrollViewInsets = false
             viewController.view.translatesAutoresizingMaskIntoConstraints = false
             self.pmc_addChildViewController(viewController, inView: contentView)
             

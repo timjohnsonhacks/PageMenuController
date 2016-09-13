@@ -83,6 +83,8 @@ public class PageMenuController: UIViewController {
             
             make.edges.equalTo(self.pageContainerView)
         }
+        
+        self.pageController = pageController
     }
     
     private func updateTitles() {
