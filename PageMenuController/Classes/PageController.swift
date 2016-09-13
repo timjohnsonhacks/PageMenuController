@@ -113,10 +113,10 @@ class PageController: UIViewController {
         var previousController: UIViewController? = nil
         viewControllers.forEach({ (viewController: UIViewController) in
             
+            self.pmc_addChildViewController(viewController, inView: contentView)
             
             viewController.automaticallyAdjustsScrollViewInsets = false
             viewController.view.translatesAutoresizingMaskIntoConstraints = false
-            self.pmc_addChildViewController(viewController, inView: contentView)
             
             viewController.view.snp_makeConstraints(closure: { (make) in
                 
