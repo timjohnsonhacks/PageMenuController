@@ -81,7 +81,7 @@ class PageController: UIViewController {
         if let initialIndex = self.initialIndex {
          
             let width = CGRectGetWidth(self.scrollView.frame)
-            if (self.scrollView.contentOffset.x != (CGFloat(initialIndex) * width)) && width > 0 {
+            if (self.scrollView.contentOffset.x != (CGFloat(initialIndex) * width)) && width > 0 && initialIndex < self.viewControllers?.count {
                 
                 let indexPath = NSIndexPath(forItem: initialIndex, inSection: 0)
                 self.scrollToItemAtIndexPath(indexPath)
@@ -182,11 +182,12 @@ class PageController: UIViewController {
         })
     }
     
-    func scrollToItemAtIndexPath(indexPath: NSIndexPath) {
+    func scrollToItemAtIndexPath(indexPath: NSIndexPath){
+       
+        let width = CGRectGetWidth(self.scrollView.frame)
+        let offset = CGFloat(indexPath.row) * width
         
-        let offset = CGFloat(indexPath.row) * CGRectGetWidth(self.scrollView.frame)
-        
-        if offset <= self.scrollView.contentSize.width {
+        if (offset + width) <= self.scrollView.contentSize.width {
          
             let contentOffset = CGPointMake(offset, 0)
             
