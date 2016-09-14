@@ -12,8 +12,9 @@ import UIKit
 private struct Constants {
     
     static let DefaultTitleHeight: CGFloat = 64
-    
     static let DefaultSeparatorHeight: CGFloat = 1.0 / UIScreen.mainScreen().scale
+    
+    static let DefaultAnimationDuration: NSTimeInterval = 0.3
 }
 
 public protocol PageMenuControllerDelegate: class {
@@ -28,6 +29,10 @@ public class PageMenuController: UIViewController {
     @IBOutlet private weak var titleContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var separatorViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var separatorView: UIView!
+    
+    @IBOutlet private weak var titleContainerTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var pageContainerToSeparatorConstraint: NSLayoutConstraint!
+    @IBOutlet private var pageContainerToTopConstraint: NSLayoutConstraint!
     
     internal var pageTitleView: PageTitleView?
     private var pageController: PageController?
@@ -49,6 +54,14 @@ public class PageMenuController: UIViewController {
         didSet {
             
             self.updateSeparatorHeight()
+        }
+    }
+    
+    public var extendEdgesUnderTitleBar: Bool = false {
+        
+        didSet {
+            
+            self.updatePageContainerTopConstraint()
         }
     }
     
@@ -150,6 +163,7 @@ public class PageMenuController: UIViewController {
         super.viewDidLoad()
         
         self.initializeInterface()
+        self.updatePageContainerTopConstraint()
         self.addPageTitleView()
         self.addPageController()
     }
@@ -164,17 +178,26 @@ public class PageMenuController: UIViewController {
     
     private func updateTitleViewHeight() {
         
-        if self.titleContainerHeightConstraint != nil {
+        self.performViewUpdatesOnMainThread {
             
-            self.titleContainerHeightConstraint.constant = titleContainerHeight
+            self.titleContainerHeightConstraint.constant = self.titleContainerHeight
         }
     }
     
     private func updateSeparatorHeight() {
         
-        if self.separatorViewHeightConstraint != nil {
+        self.performViewUpdatesOnMainThread { 
          
-            self.separatorViewHeightConstraint.constant = hidesSeparator ? 0.0 : Constants.DefaultSeparatorHeight
+            self.separatorViewHeightConstraint.constant = self.hidesSeparator ? 0.0 : Constants.DefaultSeparatorHeight
+        }
+    }
+    
+    private func updatePageContainerTopConstraint() {
+                
+        self.performViewUpdatesOnMainThread{
+            
+            self.pageContainerToTopConstraint.active = self.extendEdgesUnderTitleBar
+            self.pageContainerToSeparatorConstraint.active = !self.extendEdgesUnderTitleBar
         }
     }
     
@@ -229,6 +252,44 @@ public class PageMenuController: UIViewController {
         
         self.viewControllers?.forEach({ titles.append($0.title ?? "") })
         self.pageTitleView?.titles = titles
+    }
+    
+    public func hideTopBar() {
+        
+        self.toggleTopBar(true)
+    }
+    
+    public func showTopBar() {
+        
+        self.toggleTopBar(false)
+    }
+    
+    private func toggleTopBar(hide: Bool) {
+        
+        UIView.animateWithDuration(Constants.DefaultAnimationDuration) {
+            
+            if self.isViewLoaded() {
+                
+                self.titleContainerTopConstraint.constant = hide ? -(self.titleContainerHeightConstraint.constant + self.separatorViewHeightConstraint.constant) : 0
+                
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    private func performViewUpdatesOnMainThread(block: (() -> Void)) {
+        
+        if self.isViewLoaded() {
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                block()
+                
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
+            })
+        }
     }
 }
 

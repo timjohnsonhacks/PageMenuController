@@ -7,10 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PageMenuController" customModule="PageMenuController" customModuleProvider="target">
             <connections>
+                <outlet property="pageContainerToSeparatorConstraint" destination="Jmi-XS-3jH" id="ktl-Ru-QiA"/>
+                <outlet property="pageContainerToTopConstraint" destination="wwk-Lo-qhy" id="49U-NL-LqU"/>
                 <outlet property="pageContainerView" destination="5IY-NS-ubL" id="PRa-e1-W2Z"/>
                 <outlet property="separatorView" destination="hhv-iO-PAP" id="Ba1-B8-YnB"/>
                 <outlet property="separatorViewHeightConstraint" destination="AXq-dc-Bjl" id="9yG-Wp-zLv"/>
                 <outlet property="titleContainerHeightConstraint" destination="o9u-6s-9yK" id="hoR-Sp-Vab"/>
+                <outlet property="titleContainerTopConstraint" destination="tMn-Lo-eSj" id="lCk-vO-ERX"/>
                 <outlet property="titleContainerView" destination="e3W-aU-LNl" id="fCs-UG-Q1C"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Bk2-1G-TeM"/>
             </connections>
@@ -45,13 +48,19 @@
                 <constraint firstItem="5IY-NS-ubL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FJH-W1-StZ"/>
                 <constraint firstAttribute="trailing" secondItem="hhv-iO-PAP" secondAttribute="trailing" id="Gku-2T-Jpa"/>
                 <constraint firstAttribute="bottom" secondItem="5IY-NS-ubL" secondAttribute="bottom" id="I6b-Ds-yWV"/>
-                <constraint firstItem="5IY-NS-ubL" firstAttribute="top" secondItem="hhv-iO-PAP" secondAttribute="bottom" id="Jmi-XS-3jH"/>
+                <constraint firstItem="5IY-NS-ubL" firstAttribute="top" secondItem="hhv-iO-PAP" secondAttribute="bottom" priority="250" id="Jmi-XS-3jH"/>
                 <constraint firstAttribute="trailing" secondItem="e3W-aU-LNl" secondAttribute="trailing" id="Lfz-iO-xEq"/>
                 <constraint firstItem="hhv-iO-PAP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SVx-CE-tjG"/>
                 <constraint firstItem="e3W-aU-LNl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VZg-Qg-SeT"/>
                 <constraint firstItem="hhv-iO-PAP" firstAttribute="top" secondItem="e3W-aU-LNl" secondAttribute="bottom" id="h6K-Mv-LGl"/>
                 <constraint firstItem="e3W-aU-LNl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tMn-Lo-eSj"/>
+                <constraint firstItem="5IY-NS-ubL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="250" id="wwk-Lo-qhy"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="wwk-Lo-qhy"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>
