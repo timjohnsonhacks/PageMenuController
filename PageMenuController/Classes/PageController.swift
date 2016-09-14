@@ -35,7 +35,14 @@ class PageController: UIViewController {
     
     weak var delegate: PageControllerDelegate?
     
-    var initialIndex: Int?
+    var initialIndex: Int? {
+        
+        didSet {
+            
+            self.view.setNeedsLayout()
+        }
+    }
+    
     var selectedIndex: Int = 0
     var lastOffset: CGFloat = 0
     
