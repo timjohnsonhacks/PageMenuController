@@ -170,6 +170,8 @@ public class PageMenuController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        self.parentViewController?.automaticallyAdjustsScrollViewInsets = false
+        
         self.initializeInterface()
         self.updatePageContainerTopConstraint()
         self.addPageTitleView()
