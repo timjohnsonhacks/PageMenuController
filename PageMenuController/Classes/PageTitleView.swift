@@ -83,6 +83,7 @@ class PageTitleView: UIView {
         
         didSet {
             
+            self.updateSelectionIndicatorWidth()
             self.collectionView.reloadData()
         }
     }
@@ -97,7 +98,7 @@ class PageTitleView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.selectionIndicatorWidthConstraint.constant = CGRectGetWidth(self.collectionView.frame) / CGFloat(self.titles?.count ?? 1)
+        self.updateSelectionIndicatorWidth()
         self.updateSelectedContent()
     }
     
@@ -105,6 +106,12 @@ class PageTitleView: UIView {
         
         self.collectionView.allowsMultipleSelection = true
         self.collectionView.registerNib(PageTitleViewCell.pmc_nib, forCellWithReuseIdentifier: PageTitleViewCell.pmc_nibName)
+    }
+    
+    private func updateSelectionIndicatorWidth() {
+        
+        let count = self.titles?.count ?? 1
+        self.selectionIndicatorWidthConstraint.constant = count > 1 ? CGRectGetWidth(self.collectionView.frame) / CGFloat(count) : 0
     }
     
     private func updateInterfaceElements() {
