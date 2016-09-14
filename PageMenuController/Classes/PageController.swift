@@ -35,6 +35,7 @@ class PageController: UIViewController {
     
     weak var delegate: PageControllerDelegate?
     
+    var initialIndex: Int?
     var selectedIndex: Int = 0
     var lastOffset: CGFloat = 0
     
@@ -76,6 +77,19 @@ class PageController: UIViewController {
         super.viewDidLayoutSubviews()
         
         self.scrollView.contentInset = UIEdgeInsetsZero
+        
+        if let initialIndex = self.initialIndex {
+         
+            let width = CGRectGetWidth(self.scrollView.frame)
+            if (self.scrollView.contentOffset.x != (CGFloat(initialIndex) * width)) && width > 0 {
+                
+                let indexPath = NSIndexPath(forItem: initialIndex, inSection: 0)
+                self.scrollToItemAtIndexPath(indexPath)
+            } else {
+                
+                self.initialIndex = nil
+            }
+        }
     }
     
     private func removeViewControllers() {
@@ -86,7 +100,6 @@ class PageController: UIViewController {
         }
         
         viewControllers.forEach({ (viewController: UIViewController) in
-            
             
             self.pmc_removeChildViewControllerFromView(viewController)
         })
@@ -173,9 +186,12 @@ class PageController: UIViewController {
         
         let offset = CGFloat(indexPath.row) * CGRectGetWidth(self.scrollView.frame)
         
-        let contentOffset = CGPointMake(offset, 0)
-        
-        self.beginAppearanceTransitionForScrollView(self.scrollView, targetOffset: offset)
-        self.scrollView.setContentOffset(contentOffset, animated: true)
+        if offset <= self.scrollView.contentSize.width {
+         
+            let contentOffset = CGPointMake(offset, 0)
+            
+            self.beginAppearanceTransitionForScrollView(self.scrollView, targetOffset: offset)
+            self.scrollView.setContentOffset(contentOffset, animated: true)
+        }
     }
 }

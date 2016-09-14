@@ -151,6 +151,14 @@ public class PageMenuController: UIViewController {
         }
     }
     
+    public var initialIndex: Int? {
+        
+        didSet {
+            
+            self.pageController?.initialIndex = initialIndex
+        }
+    }
+    
     public init() {
         super.init(nibName: "PageMenuController", bundle: NSBundle.pmc_pageMenuResourceBundle())
     }
