@@ -39,7 +39,7 @@ extension PageMenuController {
             viewController = object as? UIViewController,
             viewControllerIndex = self.viewControllers?.indexOf(viewController) where keyPath == Constants.TitleKeyPath && context == &KVOContext {
             
-            self.pageTitleView?.updateCellAtIndex(viewControllerIndex)
+            self.pageTitleView?.updateCellAtIndex(viewControllerIndex, title: viewController.title)
         }
     }
 }

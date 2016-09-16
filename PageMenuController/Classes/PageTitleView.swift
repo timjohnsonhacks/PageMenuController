@@ -143,14 +143,14 @@ class PageTitleView: UIView {
         }
     }
     
-    func updateCellAtIndex(index: Int) {
+    func updateCellAtIndex(index: Int, title: String?) {
 
-        let indexPath = NSIndexPath(forItem: index, inSection: 0)
-        if self.collectionView.numberOfSections() > indexPath.section && self.collectionView.numberOfItemsInSection(0) > indexPath.row {
+        guard let title = title where self.titles?.count > index else {
             
-            self.collectionView.reloadItemsAtIndexPaths([indexPath])
-            self.updateSelectedContent()
+            return
         }
+        
+        self.titles?[index] = title
     }
     
     private func updateSelectedContent() {
