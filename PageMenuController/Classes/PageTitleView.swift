@@ -85,6 +85,7 @@ class PageTitleView: UIView {
             
             self.updateSelectionIndicatorWidth()
             self.collectionView.reloadData()
+            self.updateSelectedContent()
         }
     }
     
