@@ -20,6 +20,7 @@ private struct Constants {
 public protocol PageMenuControllerDelegate: class {
     
     func pageMenuDidSelectController(controller: UIViewController, atIndex index: Int)
+    func pageMenuControllerIsUpdatingBars(hide: Bool)
 }
 
 public class PageMenuController: UIViewController {
@@ -296,6 +297,8 @@ public class PageMenuController: UIViewController {
     private func toggleTopBar(hide: Bool) {
         
         UIView.animateWithDuration(Constants.DefaultAnimationDuration) {
+            
+            self.delegate?.pageMenuControllerIsUpdatingBars(hide)
             
             if self.isViewLoaded() {
                 
