@@ -85,7 +85,6 @@ class PageTitleView: UIView {
             
             self.updateSelectionIndicatorWidth()
             self.collectionView.reloadData()
-            self.updateSelectedContent()
         }
     }
     
@@ -152,6 +151,7 @@ class PageTitleView: UIView {
         }
         
         self.titles?[index] = title
+        self.updateSelectedContent()
     }
     
     private func updateSelectedContent() {
