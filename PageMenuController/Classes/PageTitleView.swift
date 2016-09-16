@@ -105,6 +105,7 @@ class PageTitleView: UIView {
     private func setupCollectionView() {
         
         self.collectionView.allowsMultipleSelection = true
+        self.collectionView.scrollsToTop = false
         self.collectionView.registerNib(PageTitleViewCell.pmc_nib, forCellWithReuseIdentifier: PageTitleViewCell.pmc_nibName)
     }
     

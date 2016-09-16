@@ -57,6 +57,22 @@ public class PageMenuController: UIViewController {
         }
     }
     
+    public var bounces: Bool = true {
+        
+        didSet {
+            
+            self.pageController?.bounces = bounces
+        }
+    }
+    
+    public var backgroundColor: UIColor = UIColor.whiteColor() {
+        
+        didSet {
+            
+            self.pageController?.backgroundColor = backgroundColor
+        }
+    }
+    
     public var extendEdgesUnderTitleBar: Bool = false {
         
         didSet {
@@ -232,6 +248,9 @@ public class PageMenuController: UIViewController {
     private func addPageController() {
         
         let pageController = PageController()
+        
+        pageController.backgroundColor = self.backgroundColor
+        pageController.bounces = self.bounces
         
         pageController.delegate = self
         pageController.viewControllers = self.viewControllers

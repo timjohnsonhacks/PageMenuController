@@ -35,6 +35,10 @@ class PageController: UIViewController {
     
     weak var delegate: PageControllerDelegate?
     
+    
+    var selectedIndex: Int = 0
+    var lastOffset: CGFloat = 0
+    
     var initialIndex: Int? {
         
         didSet {
@@ -43,8 +47,27 @@ class PageController: UIViewController {
         }
     }
     
-    var selectedIndex: Int = 0
-    var lastOffset: CGFloat = 0
+    var bounces: Bool = true {
+        
+        didSet {
+            
+            if self.scrollView != nil {
+                
+                self.scrollView.bounces = bounces
+            }
+        }
+    }
+    
+    var backgroundColor: UIColor = UIColor.whiteColor() {
+        
+        didSet {
+            
+            if self.scrollView != nil {
+             
+                self.scrollView.backgroundColor = backgroundColor
+            }
+        }
+    }
     
     var viewControllers: [UIViewController]? {
         
@@ -75,6 +98,9 @@ class PageController: UIViewController {
         super.viewDidLoad()
         
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        self.scrollView.backgroundColor = self.backgroundColor
+        self.scrollView.scrollsToTop = false
         
         self.adjustForPageType()
         self.setupViewControllers()
@@ -117,7 +143,7 @@ class PageController: UIViewController {
         self.contentViewWidthConstraint.active = (self.pageType == .Vertical)
         self.contentViewHeightConstraint.active = (self.pageType == .Horizontal)
         
-        self.scrollView.bounces = true
+        self.scrollView.bounces = self.bounces
         self.scrollView.alwaysBounceVertical = (self.pageType == .Vertical)
         self.scrollView.alwaysBounceHorizontal = (self.pageType == .Horizontal)
     }
