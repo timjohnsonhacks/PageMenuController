@@ -35,7 +35,6 @@ class PageController: UIViewController {
     
     weak var delegate: PageControllerDelegate?
     
-    
     var selectedIndex: Int = 0
     var lastOffset: CGFloat = 0
     
@@ -168,6 +167,7 @@ class PageController: UIViewController {
                 
                 if self.pageType == .Horizontal {
                     
+                    make.width.equalTo(self.view)
                     make.top.equalTo(contentView)
                     make.bottom.equalTo(contentView)
                     
@@ -188,6 +188,7 @@ class PageController: UIViewController {
                     
                 } else if self.pageType == .Vertical {
                     
+                    make.height.equalTo(self.view)
                     make.leading.equalTo(contentView)
                     make.trailing.equalTo(contentView)
                     
@@ -206,9 +207,6 @@ class PageController: UIViewController {
                         make.bottom.equalTo(contentView)
                     }
                 }
-                
-                make.width.equalTo(self.view)
-                make.height.equalTo(self.view)
             })
             
             previousController = viewController

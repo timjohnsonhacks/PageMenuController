@@ -190,38 +190,38 @@ public class PageMenuController: UIViewController {
         self.parentViewController?.automaticallyAdjustsScrollViewInsets = false
         
         self.initializeInterface()
-        self.updatePageContainerTopConstraint()
+        self.updatePageContainerTopConstraint(true)
         self.addPageTitleView()
         self.addPageController()
     }
     
     private func initializeInterface() {
         
-        self.updateTitleViewHeight()
+        self.updateTitleViewHeight(true)
         
         self.separatorView.backgroundColor = self.separatorColor
-        self.updateSeparatorHeight()
+        self.updateSeparatorHeight(true)
     }
     
-    private func updateTitleViewHeight() {
-        
-        self.performViewUpdatesOnMainThread {
+    private func updateTitleViewHeight(initialSetup: Bool = false) {
+         
+        self.performViewUpdatesOnMainThread(initialSetup) {
             
             self.titleContainerHeightConstraint.constant = self.titleContainerHeight
         }
     }
     
-    private func updateSeparatorHeight() {
-        
-        self.performViewUpdatesOnMainThread { 
+    private func updateSeparatorHeight(initialSetup: Bool = false) {
          
+        self.performViewUpdatesOnMainThread(initialSetup) {
+            
             self.separatorViewHeightConstraint.constant = self.hidesSeparator ? 0.0 : Constants.DefaultSeparatorHeight
         }
     }
     
-    private func updatePageContainerTopConstraint() {
-                
-        self.performViewUpdatesOnMainThread{
+    private func updatePageContainerTopConstraint(initialSetup: Bool = false) {
+        
+        self.performViewUpdatesOnMainThread(initialSetup) {
             
             self.pageContainerToTopConstraint.active = self.extendEdgesUnderTitleBar
             self.pageContainerToSeparatorConstraint.active = !self.extendEdgesUnderTitleBar
@@ -310,17 +310,23 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    private func performViewUpdatesOnMainThread(block: (() -> Void)) {
+    private func performViewUpdatesOnMainThread(initialSetup: Bool = false, block: (() -> Void)) {
         
         if self.isViewLoaded() {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            if initialSetup {
                 
                 block()
-                
-                self.view.setNeedsLayout()
-                self.view.layoutIfNeeded()
-            })
+            } else {
+             
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    block()
+                    
+                    self.view.setNeedsLayout()
+                    self.view.layoutIfNeeded()
+                })
+            }
         }
     }
 }
