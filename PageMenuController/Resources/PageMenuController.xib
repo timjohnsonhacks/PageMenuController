@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5IY-NS-ubL">
-                    <rect key="frame" x="0.0" y="65" width="600" height="535"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhv-iO-PAP">
@@ -58,7 +58,7 @@
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="wwk-Lo-qhy"/>
+                    <exclude reference="Jmi-XS-3jH"/>
                 </mask>
             </variation>
         </view>
