@@ -23,7 +23,7 @@ class PageTitleView: UIView {
     
     weak var delegate: PageTitleViewDelegate?
     
-    var selectionIndicatorColor: UIColor = UIColor.darkGrayColor() {
+    var selectionIndicatorColor: UIColor = UIColor.darkGray {
         
         didSet {
             
@@ -31,7 +31,7 @@ class PageTitleView: UIView {
         }
     }
     
-    var selectedBackgroundColor: UIColor = UIColor.lightGrayColor() {
+    var selectedBackgroundColor: UIColor = UIColor.lightGray {
         
         didSet {
             
@@ -39,7 +39,7 @@ class PageTitleView: UIView {
         }
     }
     
-    var unselectedBackgroundColor: UIColor = UIColor.whiteColor() {
+    var unselectedBackgroundColor: UIColor = UIColor.white {
         
         didSet {
             
@@ -47,7 +47,7 @@ class PageTitleView: UIView {
         }
     }
     
-    var selectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
+    var selectedFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize) {
         
         didSet {
             
@@ -55,7 +55,7 @@ class PageTitleView: UIView {
         }
     }
     
-    var unselectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
+    var unselectedFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize) {
         
         didSet {
             
@@ -63,7 +63,7 @@ class PageTitleView: UIView {
         }
     }
     
-    var selectedFontColor: UIColor = UIColor.blackColor() {
+    var selectedFontColor: UIColor = UIColor.black {
         
         didSet {
             
@@ -71,7 +71,7 @@ class PageTitleView: UIView {
         }
     }
     
-    var unselectedFontColor: UIColor = UIColor.blackColor() {
+    var unselectedFontColor: UIColor = UIColor.black {
         
         didSet {
             
@@ -106,20 +106,20 @@ class PageTitleView: UIView {
         
         self.collectionView.allowsMultipleSelection = true
         self.collectionView.scrollsToTop = false
-        self.collectionView.registerNib(PageTitleViewCell.pmc_nib, forCellWithReuseIdentifier: PageTitleViewCell.pmc_nibName)
+        self.collectionView.register(PageTitleViewCell.pmc_nib, forCellWithReuseIdentifier: PageTitleViewCell.pmc_nibName)
     }
     
     private func updateSelectionIndicatorWidth() {
         
         let count = self.titles?.count ?? 1
-        self.selectionIndicatorWidthConstraint.constant = count > 1 ? CGRectGetWidth(self.collectionView.frame) / CGFloat(count) : 0
+        self.selectionIndicatorWidthConstraint.constant = count > 1 ? self.collectionView.frame.width / CGFloat(count) : 0
     }
     
     private func updateInterfaceElements() {
         
         self.selectionIndicator.backgroundColor = self.selectionIndicatorColor
         
-        for case let cell as PageTitleViewCell in self.collectionView.visibleCells() {
+        for case let cell as PageTitleViewCell in self.collectionView.visibleCells {
              
             cell.selectedFont = self.selectedFont
             cell.selectedFontColor = self.selectedFontColor
@@ -135,7 +135,7 @@ class PageTitleView: UIView {
         
         if contentSize > 0 {
          
-            let sizeRatio = CGRectGetWidth(self.frame) / contentSize
+            let sizeRatio = self.frame.width / contentSize
             let relativeOffset = offset * sizeRatio
             
             self.selectionIndicatorLeadingConstraint.constant = relativeOffset
@@ -145,7 +145,7 @@ class PageTitleView: UIView {
     
     func updateCellAtIndex(index: Int, title: String?) {
 
-        guard let title = title where self.titles?.count > index else {
+        guard let title = title, (self.titles?.count ?? 0) > index else {
             
             return
         }
@@ -158,16 +158,16 @@ class PageTitleView: UIView {
         
         let relativeOffset = self.selectionIndicatorLeadingConstraint.constant
         let selectionOffset = relativeOffset + (self.selectionIndicatorWidthConstraint.constant / 2)
-        let selectedPoint = CGPointMake(selectionOffset, 0)
-        if let indexPath = self.collectionView.indexPathForItemAtPoint(selectedPoint) {
+        let selectedPoint = CGPoint(x: selectionOffset, y: 0)
+        if let indexPath = self.collectionView.indexPathForItem(at: selectedPoint) {
             
-            if let selectedIndexPath = self.collectionView.indexPathsForSelectedItems()?.last where selectedIndexPath != indexPath {
+            if let selectedIndexPath = self.collectionView.indexPathsForSelectedItems?.last, selectedIndexPath != indexPath {
                 
-                self.collectionView.deselectItemAtIndexPath(selectedIndexPath, animated: false)
-                self.collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: .CenteredVertically)
-            } else if self.collectionView.indexPathsForSelectedItems()?.last == nil {
+                self.collectionView.deselectItem(at: selectedIndexPath, animated: false)
+                self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+            } else if self.collectionView.indexPathsForSelectedItems?.last == nil {
                 
-                self.collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: .CenteredVertically)
+                self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
             }
         }
     }
@@ -175,14 +175,9 @@ class PageTitleView: UIView {
 
 extension PageTitleView: UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        return self.titles?.count ?? 0
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        let pageTitleCell = collectionView.dequeueReusableCellWithReuseIdentifier(PageTitleViewCell.pmc_nibName, forIndexPath: indexPath) as! PageTitleViewCell
+        let pageTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: PageTitleViewCell.pmc_nibName, for: indexPath as IndexPath) as! PageTitleViewCell
         
         let title = self.titles?[safe: indexPath.row]
         pageTitleCell.title = title
@@ -198,28 +193,34 @@ extension PageTitleView: UICollectionViewDataSource {
         
         return pageTitleCell
     }
+
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return self.titles?.count ?? 0
+    }
 }
 
 extension PageTitleView: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = CGRectGetWidth(collectionView.frame)
-        let height = CGRectGetHeight(collectionView.frame)
+        let width = collectionView.frame.width
+        let height = collectionView.frame.height
         
         let cellWidth = width / CGFloat(self.titles?.count ?? 1)
         
-        return CGSizeMake(cellWidth, height)
+        return CGSize(width: cellWidth, height: height)
     }
     
-    func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         
         return false
     }
     
-    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         
-        self.delegate?.pageTitleViewDidSelectItemAtIndexPath(indexPath)
+        self.delegate?.pageTitleViewDidSelectItemAtIndexPath(indexPath: indexPath as NSIndexPath)
         
         return false
     }

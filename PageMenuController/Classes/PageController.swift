@@ -57,7 +57,7 @@ class PageController: UIViewController {
         }
     }
     
-    var backgroundColor: UIColor = UIColor.whiteColor() {
+    var backgroundColor: UIColor = UIColor.white {
         
         didSet {
             
@@ -86,7 +86,7 @@ class PageController: UIViewController {
     }
     
     init() {
-        super.init(nibName: "PageController", bundle: NSBundle.pmc_pageMenuResourceBundle())
+        super.init(nibName: "PageController", bundle: Bundle.pmc_pageMenuResourceBundle())
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -108,17 +108,17 @@ class PageController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.scrollView.contentInset = UIEdgeInsetsZero
+        self.scrollView.contentInset = UIEdgeInsets.zero
         
         if let initialIndex = self.initialIndex {
          
-            let width = CGRectGetWidth(self.scrollView.frame)
+            let width = self.scrollView.frame.width
             let offset = CGFloat(initialIndex) * width
             
             if (self.scrollView.contentOffset.x != offset) && width > 0 {
                 
-                let indexPath = NSIndexPath(forItem: initialIndex, inSection: 0)
-                self.scrollToItemAtIndexPath(indexPath, animated: true)
+                let indexPath = NSIndexPath(item: initialIndex, section: 0)
+                self.scrollToItemAtIndexPath(indexPath: indexPath, animated: true)
                 self.initialIndex = nil
             }
         }
@@ -133,14 +133,14 @@ class PageController: UIViewController {
         
         viewControllers.forEach({ (viewController: UIViewController) in
             
-            self.pmc_removeChildViewControllerFromView(viewController)
+            self.pmc_removeChildViewControllerFromView(viewController: viewController)
         })
     }
     
     private func adjustForPageType() {
         
-        self.contentViewWidthConstraint.active = (self.pageType == .Vertical)
-        self.contentViewHeightConstraint.active = (self.pageType == .Horizontal)
+        self.contentViewWidthConstraint.isActive = (self.pageType == .Vertical)
+        self.contentViewHeightConstraint.isActive = (self.pageType == .Horizontal)
         
         self.scrollView.bounces = self.bounces
         self.scrollView.alwaysBounceVertical = (self.pageType == .Vertical)
@@ -150,7 +150,7 @@ class PageController: UIViewController {
     private func setupViewControllers() {
         
         guard let viewControllers = self.viewControllers,
-            contentView = self.contentView else {
+            let contentView = self.contentView else {
             
             return
         }
@@ -158,12 +158,12 @@ class PageController: UIViewController {
         var previousController: UIViewController? = nil
         viewControllers.forEach({ (viewController: UIViewController) in
             
-            self.pmc_addChildViewController(viewController, inView: contentView)
+            self.pmc_addChildViewController(viewController: viewController, inView: contentView)
             
             viewController.automaticallyAdjustsScrollViewInsets = false
             viewController.view.translatesAutoresizingMaskIntoConstraints = false
             
-            viewController.view.snp_makeConstraints(closure: { (make) in
+            viewController.view.snp_makeConstraints({ (make) in
                 
                 if self.pageType == .Horizontal {
                     
@@ -215,14 +215,14 @@ class PageController: UIViewController {
     
     func scrollToItemAtIndexPath(indexPath: NSIndexPath, animated: Bool = true) {
        
-        let width = CGRectGetWidth(self.scrollView.frame)
+        let width = self.scrollView.frame.width
         let offset = CGFloat(indexPath.row) * width
         
-        if indexPath.row < self.viewControllers?.count {
+        if indexPath.row < (self.viewControllers?.count ?? 0) {
          
-            let contentOffset = CGPointMake(offset, 0)
+            let contentOffset = CGPoint(x: offset, y: 0)
             
-            self.beginAppearanceTransitionForScrollView(self.scrollView, targetOffset: offset)
+            self.beginAppearanceTransitionForScrollView(scrollView: self.scrollView, targetOffset: offset)
             self.scrollView.setContentOffset(contentOffset, animated: animated)
         }
     }

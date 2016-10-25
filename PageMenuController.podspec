@@ -20,5 +20,5 @@ This library allows for the creation of an Android like navigation menu on iOS. 
     'PageMenuController' => ['PageMenuController/Resources/**/*.xib']
   }
 
-  s.dependency 'SnapKit', '~> 0.22.0'
+  s.dependency 'SnapKit', '~> 3.0.0'
 end

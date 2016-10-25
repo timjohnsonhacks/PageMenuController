@@ -15,12 +15,12 @@ extension UIViewController {
         
         self.addChildViewController(viewController)
         view.addSubview(viewController.view)
-        viewController.didMoveToParentViewController(self)
+        viewController.didMove(toParentViewController: self)
     }
     
     func pmc_removeChildViewControllerFromView(viewController: UIViewController) {
         
-        viewController.willMoveToParentViewController(nil)
+        viewController.willMove(toParentViewController: nil)
         viewController.view.removeFromSuperview()
         viewController.removeFromParentViewController()
     }

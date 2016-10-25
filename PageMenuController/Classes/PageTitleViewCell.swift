@@ -13,7 +13,7 @@ class PageTitleViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    var selectedBackgroundColor: UIColor = UIColor.lightGrayColor() {
+    var selectedBackgroundColor: UIColor = UIColor.lightGray {
         
         didSet {
             
@@ -21,7 +21,7 @@ class PageTitleViewCell: UICollectionViewCell {
         }
     }
     
-    var unselectedBackgroundColor: UIColor = UIColor.whiteColor()  {
+    var unselectedBackgroundColor: UIColor = UIColor.white  {
         
         didSet {
             
@@ -29,7 +29,7 @@ class PageTitleViewCell: UICollectionViewCell {
         }
     }
     
-    var selectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
+    var selectedFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize) {
         
         didSet {
             
@@ -37,7 +37,7 @@ class PageTitleViewCell: UICollectionViewCell {
         }
     }
     
-    var unselectedFont: UIFont = UIFont.systemFontOfSize(UIFont.systemFontSize()) {
+    var unselectedFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize) {
         
         didSet {
             
@@ -45,7 +45,7 @@ class PageTitleViewCell: UICollectionViewCell {
         }
     }
     
-    var selectedFontColor: UIColor = UIColor.blackColor() {
+    var selectedFontColor: UIColor = UIColor.black {
         
         didSet {
             
@@ -53,7 +53,7 @@ class PageTitleViewCell: UICollectionViewCell {
         }
     }
     
-    var unselectedFontColor: UIColor = UIColor.blackColor() {
+    var unselectedFontColor: UIColor = UIColor.black {
         
         didSet {
             
@@ -62,20 +62,20 @@ class PageTitleViewCell: UICollectionViewCell {
         }
     }
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         
         didSet {
             
             self.updateInterfaceElements()
-            self.titleLabel.highlighted = false
+            self.titleLabel.isHighlighted = false
         }
     }
     
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         
         didSet {
             
-            self.titleLabel.highlighted = highlighted && !self.selected
+            self.titleLabel.isHighlighted = isHighlighted && !self.isSelected
         }
     }
     
@@ -96,13 +96,13 @@ class PageTitleViewCell: UICollectionViewCell {
     
     private func updateHighlightedTextColor() {
         
-        self.titleLabel.highlightedTextColor = self.unselectedFontColor.colorWithAlphaComponent(0.3)
+        self.titleLabel.highlightedTextColor = self.unselectedFontColor.withAlphaComponent(0.3)
     }
     
     private func updateInterfaceElements() {
         
-        self.backgroundColor = self.selected ? self.selectedBackgroundColor : self.unselectedBackgroundColor
-        self.titleLabel.textColor = self.selected ? self.selectedFontColor : self.unselectedFontColor
-        self.titleLabel.font = self.selected ? self.selectedFont : self.unselectedFont
+        self.backgroundColor = self.isSelected ? self.selectedBackgroundColor : self.unselectedBackgroundColor
+        self.titleLabel.textColor = self.isSelected ? self.selectedFontColor : self.unselectedFontColor
+        self.titleLabel.font = self.isSelected ? self.selectedFont : self.unselectedFont
     }
 }

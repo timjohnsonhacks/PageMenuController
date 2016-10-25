@@ -18,38 +18,38 @@ enum ScrollDirection: Int {
 
 extension PageController: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        self.delegate?.pagingScrollViewDidScroll(scrollView)
+        self.delegate?.pagingScrollViewDidScroll(scrollView: scrollView)
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         
         self.appearingViewController?.endAppearanceTransition()
         self.disappearingViewController?.endAppearanceTransition()
     }
     
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
-        self.beginAppearanceTransitionForScrollView(scrollView, targetOffset: targetContentOffset.memory.x)
+        self.beginAppearanceTransitionForScrollView(scrollView: scrollView, targetOffset: targetContentOffset.pointee.x)
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
-        self.endAppearanceTransitionsForScrollView(scrollView)
+        self.endAppearanceTransitionsForScrollView(scrollView: scrollView)
     }
     
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         
-        self.endAppearanceTransitionsForScrollView(scrollView)
+        self.endAppearanceTransitionsForScrollView(scrollView: scrollView)
     }
     
     func beginAppearanceTransitionForScrollView(scrollView: UIScrollView, targetOffset: CGFloat) {
         
-        let currentIndex = self.calculateIndex(targetOffset, scrollView: scrollView)
+        let currentIndex = self.calculateIndex(offset: targetOffset, scrollView: scrollView)
         
         if let currentViewController = self.viewControllers?[safe: currentIndex],
-            previousController = self.viewControllers?[safe: self.selectedIndex] where currentViewController != previousController {
+            let previousController = self.viewControllers?[safe: self.selectedIndex], currentViewController != previousController {
             
             currentViewController.beginAppearanceTransition(true, animated: true)
             previousController.beginAppearanceTransition(false, animated: true)
@@ -62,10 +62,10 @@ extension PageController: UIScrollViewDelegate {
     private func endAppearanceTransitionsForScrollView(scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset.x
-        let currentIndex = self.calculateIndex(offset, scrollView: scrollView)
+        let currentIndex = self.calculateIndex(offset: offset, scrollView: scrollView)
         
         if let currentViewController = self.viewControllers?[safe: currentIndex],
-            previousController = self.viewControllers?[safe: self.selectedIndex] where currentViewController != previousController {
+            let previousController = self.viewControllers?[safe: self.selectedIndex], currentViewController != previousController {
             
             self.appearingViewController?.endAppearanceTransition()
             self.disappearingViewController?.endAppearanceTransition()
@@ -75,24 +75,24 @@ extension PageController: UIScrollViewDelegate {
             
             self.selectedIndex = currentIndex
             
-            self.delegate?.pagingScrollViewDidSelectViewController(currentViewController, atIndex: currentIndex)
+            self.delegate?.pagingScrollViewDidSelectViewController(controller: currentViewController, atIndex: currentIndex)
         }
     }
     
     private func calculateIndex(offset: CGFloat, scrollView: UIScrollView) -> Int {
         
-        let scrollDirection = self.calculateScrollDirection(offset)
+        let scrollDirection = self.calculateScrollDirection(offset: offset)
         let currentIndex: Int
         
         if scrollDirection == .Forwards {
             
-            currentIndex = Int(ceil(offset / CGRectGetWidth(scrollView.frame)))
+            currentIndex = Int(ceil(offset / scrollView.frame.width))
         } else if scrollDirection == .Backwards {
             
-            currentIndex = Int(floor(offset / CGRectGetWidth(scrollView.frame)))
+            currentIndex = Int(floor(offset / scrollView.frame.width))
         } else {
          
-            currentIndex = Int(offset / CGRectGetWidth(scrollView.frame))
+            currentIndex = Int(offset / scrollView.frame.width)
         }
         
         return currentIndex

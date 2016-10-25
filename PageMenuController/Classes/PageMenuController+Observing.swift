@@ -20,12 +20,12 @@ extension PageMenuController {
         
         removeObservers?.forEach({ $0.removeObserver(self, forKeyPath: Constants.TitleKeyPath, context: &KVOContext) })
         
-        addObservers?.forEach({ $0.addObserver(self, forKeyPath: Constants.TitleKeyPath, options: .New, context: &KVOContext) })
+        addObservers?.forEach({ $0.addObserver(self, forKeyPath: Constants.TitleKeyPath, options: .new, context: &KVOContext) })
     }
     
     func addObserverForViewController(viewController: UIViewController) {
         
-        viewController.addObserver(self, forKeyPath: Constants.TitleKeyPath, options: .New, context: &KVOContext)
+        viewController.addObserver(self, forKeyPath: Constants.TitleKeyPath, options: .new, context: &KVOContext)
     }
     
     func removeObserverForViewController(viewController: UIViewController) {
@@ -33,13 +33,13 @@ extension PageMenuController {
         viewController.removeObserver(self, forKeyPath: Constants.TitleKeyPath, context: &KVOContext)
     }
     
-    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if let keyPath = keyPath,
-            viewController = object as? UIViewController,
-            viewControllerIndex = self.viewControllers?.indexOf(viewController) where keyPath == Constants.TitleKeyPath && context == &KVOContext {
+            let viewController = object as? UIViewController,
+            let viewControllerIndex = self.viewControllers?.index(of: viewController), keyPath == Constants.TitleKeyPath && context == &KVOContext {
             
-            self.pageTitleView?.updateCellAtIndex(viewControllerIndex, title: viewController.title)
+            self.pageTitleView?.updateCellAtIndex(index: viewControllerIndex, title: viewController.title)
         }
     }
 }

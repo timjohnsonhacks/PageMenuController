@@ -23,27 +23,27 @@ class ViewController: UIViewController {
         
         let blueViewController = ColoredViewController()
         blueViewController.title = "BLUE"
-        blueViewController.color = UIColor.blueColor()
+        blueViewController.color = UIColor.blue
         
         let redViewController = ColoredViewController()
         redViewController.title = "RED"
-        redViewController.color = UIColor.redColor()
+        redViewController.color = UIColor.red
         
         let orangeViewController = ColoredViewController()
         orangeViewController.title = "ORANGE"
-        orangeViewController.color = UIColor.orangeColor()
+        orangeViewController.color = UIColor.orange
         
         let purpleViewController = ColoredViewController()
         purpleViewController.title = "PURPLE"
-        purpleViewController.color = UIColor.purpleColor()
+        purpleViewController.color = UIColor.purple
         
         pageMenuController.viewControllers = [blueViewController, redViewController, orangeViewController, purpleViewController]
         
         self.addChildViewController(pageMenuController)
         self.view.addSubview(pageMenuController.view)
-        pageMenuController.didMoveToParentViewController(self)
+        pageMenuController.didMove(toParentViewController: self)
         
-        pageMenuController.view.snp_makeConstraints { (make) in
+        pageMenuController.view.snp.makeConstraints { (make) in
             
             make.edges.equalTo(self.view)
         }

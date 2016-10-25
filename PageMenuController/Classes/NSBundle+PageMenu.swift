@@ -13,15 +13,15 @@ private struct Constants {
     static let ResourceBundlePath = "PageMenuController.bundle"
 }
 
-extension NSBundle {
+extension Bundle {
     
-    class func pmc_pageMenuResourceBundle() -> NSBundle? {
+    class func pmc_pageMenuResourceBundle() -> Bundle? {
         
-        let pageMenuControllerBundle = NSBundle(forClass: PageMenuController.classForCoder())
+        let pageMenuControllerBundle = Bundle(for: PageMenuController.classForCoder())
         
-        if let resourceURL = pageMenuControllerBundle.resourceURL?.URLByAppendingPathComponent(Constants.ResourceBundlePath) {
+        if let resourceURL = pageMenuControllerBundle.resourceURL?.appendingPathComponent(Constants.ResourceBundlePath) {
          
-            return NSBundle(URL: resourceURL)
+            return Bundle(url: resourceURL)
         }
         
         return nil
