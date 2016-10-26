@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'PageMenu_Example' do
-  pod 'PageMenuController', '~> 1.0.0'
+  pod 'PageMenuController', :path => '../'
 
   target 'PageMenu_Tests' do
     inherit! :search_paths

@@ -94,12 +94,12 @@ class PageTitleViewCell: UICollectionViewCell {
         self.updateInterfaceElements()
     }
     
-    private func updateHighlightedTextColor() {
+    fileprivate func updateHighlightedTextColor() {
         
         self.titleLabel.highlightedTextColor = self.unselectedFontColor.withAlphaComponent(0.3)
     }
     
-    private func updateInterfaceElements() {
+    fileprivate func updateInterfaceElements() {
         
         self.backgroundColor = self.isSelected ? self.selectedBackgroundColor : self.unselectedBackgroundColor
         self.titleLabel.textColor = self.isSelected ? self.selectedFontColor : self.unselectedFontColor

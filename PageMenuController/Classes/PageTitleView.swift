@@ -11,15 +11,15 @@ import UIKit
 
 protocol PageTitleViewDelegate: class {
     
-    func pageTitleViewDidSelectItemAtIndexPath(indexPath: NSIndexPath)
+    func pageTitleViewDidSelectItemAtIndexPath(_ indexPath: IndexPath)
 }
 
 class PageTitleView: UIView {
     
-    @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var selectionIndicator: UIView!
-    @IBOutlet private weak var selectionIndicatorWidthConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var selectionIndicatorLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var collectionView: UICollectionView!
+    @IBOutlet fileprivate weak var selectionIndicator: UIView!
+    @IBOutlet fileprivate weak var selectionIndicatorWidthConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var selectionIndicatorLeadingConstraint: NSLayoutConstraint!
     
     weak var delegate: PageTitleViewDelegate?
     
@@ -102,20 +102,20 @@ class PageTitleView: UIView {
         self.updateSelectedContent()
     }
     
-    private func setupCollectionView() {
+    fileprivate func setupCollectionView() {
         
         self.collectionView.allowsMultipleSelection = true
         self.collectionView.scrollsToTop = false
         self.collectionView.register(PageTitleViewCell.pmc_nib, forCellWithReuseIdentifier: PageTitleViewCell.pmc_nibName)
     }
     
-    private func updateSelectionIndicatorWidth() {
+    fileprivate func updateSelectionIndicatorWidth() {
         
         let count = self.titles?.count ?? 1
         self.selectionIndicatorWidthConstraint.constant = count > 1 ? self.collectionView.frame.width / CGFloat(count) : 0
     }
     
-    private func updateInterfaceElements() {
+    fileprivate func updateInterfaceElements() {
         
         self.selectionIndicator.backgroundColor = self.selectionIndicatorColor
         
@@ -131,7 +131,7 @@ class PageTitleView: UIView {
         }
     }
     
-    func didScrollToOffset(offset: CGFloat, contentSize: CGFloat) {
+    func didScrollToOffset(_ offset: CGFloat, contentSize: CGFloat) {
         
         if contentSize > 0 {
          
@@ -143,7 +143,7 @@ class PageTitleView: UIView {
         }
     }
     
-    func updateCellAtIndex(index: Int, title: String?) {
+    func updateCellAtIndex(_ index: Int, title: String?) {
 
         guard let title = title, (self.titles?.count ?? 0) > index else {
             
@@ -154,7 +154,7 @@ class PageTitleView: UIView {
         self.updateSelectedContent()
     }
     
-    private func updateSelectedContent() {
+    fileprivate func updateSelectedContent() {
         
         let relativeOffset = self.selectionIndicatorLeadingConstraint.constant
         let selectionOffset = relativeOffset + (self.selectionIndicatorWidthConstraint.constant / 2)
@@ -220,7 +220,7 @@ extension PageTitleView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         
-        self.delegate?.pageTitleViewDidSelectItemAtIndexPath(indexPath: indexPath as NSIndexPath)
+        self.delegate?.pageTitleViewDidSelectItemAtIndexPath(indexPath)
         
         return false
     }

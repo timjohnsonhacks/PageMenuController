@@ -12,23 +12,23 @@ import SnapKit
 
 enum PageType {
     
-    case Vertical
-    case Horizontal
+    case vertical
+    case horizontal
 }
 
 protocol PageControllerDelegate: class {
     
-    func pagingScrollViewDidScroll(scrollView: UIScrollView)
-    func pagingScrollViewDidSelectViewController(controller: UIViewController, atIndex index: Int)
+    func pagingScrollViewDidScroll(_ scrollView: UIScrollView)
+    func pagingScrollViewDidSelectViewController(_ controller: UIViewController, atIndex index: Int)
 }
 
 class PageController: UIViewController {
     
-    @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet fileprivate weak var scrollView: UIScrollView!
+    @IBOutlet fileprivate weak var contentView: UIView!
     
-    @IBOutlet private weak var contentViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var contentViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var contentViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var contentViewWidthConstraint: NSLayoutConstraint!
     
     internal var appearingViewController: UIViewController?
     internal var disappearingViewController: UIViewController?
@@ -77,7 +77,7 @@ class PageController: UIViewController {
         }
     }
     
-    var pageType: PageType = .Horizontal {
+    var pageType: PageType = .horizontal {
         
         didSet {
 
@@ -117,14 +117,14 @@ class PageController: UIViewController {
             
             if (self.scrollView.contentOffset.x != offset) && width > 0 {
                 
-                let indexPath = NSIndexPath(item: initialIndex, section: 0)
-                self.scrollToItemAtIndexPath(indexPath: indexPath, animated: true)
+                let indexPath = IndexPath(item: initialIndex, section: 0)
+                self.scrollToItemAtIndexPath(indexPath, animated: true)
                 self.initialIndex = nil
             }
         }
     }
     
-    private func removeViewControllers() {
+    fileprivate func removeViewControllers() {
         
         guard let viewControllers = self.viewControllers else {
             
@@ -133,21 +133,21 @@ class PageController: UIViewController {
         
         viewControllers.forEach({ (viewController: UIViewController) in
             
-            self.pmc_removeChildViewControllerFromView(viewController: viewController)
+            self.pmc_removeChildViewControllerFromView(viewController)
         })
     }
     
-    private func adjustForPageType() {
+    fileprivate func adjustForPageType() {
         
-        self.contentViewWidthConstraint.isActive = (self.pageType == .Vertical)
-        self.contentViewHeightConstraint.isActive = (self.pageType == .Horizontal)
+        self.contentViewWidthConstraint.isActive = (self.pageType == .vertical)
+        self.contentViewHeightConstraint.isActive = (self.pageType == .horizontal)
         
         self.scrollView.bounces = self.bounces
-        self.scrollView.alwaysBounceVertical = (self.pageType == .Vertical)
-        self.scrollView.alwaysBounceHorizontal = (self.pageType == .Horizontal)
+        self.scrollView.alwaysBounceVertical = (self.pageType == .vertical)
+        self.scrollView.alwaysBounceHorizontal = (self.pageType == .horizontal)
     }
     
-    private func setupViewControllers() {
+    fileprivate func setupViewControllers() {
         
         guard let viewControllers = self.viewControllers,
             let contentView = self.contentView else {
@@ -158,14 +158,14 @@ class PageController: UIViewController {
         var previousController: UIViewController? = nil
         viewControllers.forEach({ (viewController: UIViewController) in
             
-            self.pmc_addChildViewController(viewController: viewController, inView: contentView)
+            self.pmc_addChildViewController(viewController, inView: contentView)
             
             viewController.automaticallyAdjustsScrollViewInsets = false
             viewController.view.translatesAutoresizingMaskIntoConstraints = false
             
             viewController.view.snp.makeConstraints({ (make) in
                 
-                if self.pageType == .Horizontal {
+                if self.pageType == .horizontal {
                     
                     make.width.equalTo(self.view)
                     make.top.equalTo(contentView)
@@ -186,7 +186,7 @@ class PageController: UIViewController {
                         make.trailing.equalTo(contentView)
                     }
                     
-                } else if self.pageType == .Vertical {
+                } else if self.pageType == .vertical {
                     
                     make.height.equalTo(self.view)
                     make.leading.equalTo(contentView)
@@ -213,7 +213,7 @@ class PageController: UIViewController {
         })
     }
     
-    func scrollToItemAtIndexPath(indexPath: NSIndexPath, animated: Bool = true) {
+    func scrollToItemAtIndexPath(_ indexPath: IndexPath, animated: Bool = true) {
        
         let width = self.scrollView.frame.width
         let offset = CGFloat(indexPath.row) * width
@@ -222,7 +222,7 @@ class PageController: UIViewController {
          
             let contentOffset = CGPoint(x: offset, y: 0)
             
-            self.beginAppearanceTransitionForScrollView(scrollView: self.scrollView, targetOffset: offset)
+            self.beginAppearanceTransitionForScrollView(self.scrollView, targetOffset: offset)
             self.scrollView.setContentOffset(contentOffset, animated: animated)
         }
     }
