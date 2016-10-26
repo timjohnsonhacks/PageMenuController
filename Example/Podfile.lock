@@ -1,6 +1,6 @@
 PODS:
-  - PageMenuController (0.1.16):
-    - SnapKit (~> 3.0.0)
+  - PageMenuController (1.0.0):
+    - SnapKit (~> 3.0.2)
   - SnapKit (3.0.2)
 
 DEPENDENCIES:
@@ -11,9 +11,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PageMenuController: 789be8fe4ecc255a001c4be8dd5eb04f9b579cce
+  PageMenuController: d99d5e60eda3c7fc46dc41f537513e73642662f0
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
 
 PODFILE CHECKSUM: 302bc2aa29fc06c1bf0d6b94883a40d3bad69a7c
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

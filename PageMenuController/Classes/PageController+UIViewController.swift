@@ -11,14 +11,14 @@ import UIKit
 
 extension UIViewController {
     
-    func pmc_addChildViewController(viewController: UIViewController, inView view: UIView) {
+    func pmc_addChildViewController(_ viewController: UIViewController, inView view: UIView) {
         
         self.addChildViewController(viewController)
         view.addSubview(viewController.view)
         viewController.didMove(toParentViewController: self)
     }
     
-    func pmc_removeChildViewControllerFromView(viewController: UIViewController) {
+    func pmc_removeChildViewControllerFromView(_ viewController: UIViewController) {
         
         viewController.willMove(toParentViewController: nil)
         viewController.view.removeFromSuperview()

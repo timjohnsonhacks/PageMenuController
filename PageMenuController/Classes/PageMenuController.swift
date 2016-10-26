@@ -19,30 +19,30 @@ private struct Constants {
 
 public protocol PageMenuControllerDelegate: class {
     
-    func pageMenuDidSelectController(controller: UIViewController, atIndex index: Int)
-    func pageMenuControllerIsUpdatingBars(hide: Bool)
+    func pageMenuDidSelectController(_ controller: UIViewController, atIndex index: Int)
+    func pageMenuControllerIsUpdatingBars(_ hide: Bool)
 }
 
-public class PageMenuController: UIViewController {
+open class PageMenuController: UIViewController {
     
-    @IBOutlet private weak var titleContainerView: UIView!
-    @IBOutlet private weak var pageContainerView: UIView!
-    @IBOutlet private weak var titleContainerHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var separatorViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var separatorView: UIView!
+    @IBOutlet fileprivate weak var titleContainerView: UIView!
+    @IBOutlet fileprivate weak var pageContainerView: UIView!
+    @IBOutlet fileprivate weak var titleContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var separatorViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var separatorView: UIView!
     
-    @IBOutlet private weak var titleContainerTopConstraint: NSLayoutConstraint!
-    @IBOutlet private var pageContainerToSeparatorConstraint: NSLayoutConstraint!
-    @IBOutlet private var pageContainerToTopConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var titleContainerTopConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate var pageContainerToSeparatorConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate var pageContainerToTopConstraint: NSLayoutConstraint!
     
     internal var pageTitleView: PageTitleView?
     fileprivate var pageController: PageController?
     
     internal var KVOContext: UInt8 = 1
     
-    public var delegate: PageMenuControllerDelegate?
+    open var delegate: PageMenuControllerDelegate?
     
-    public var titleContainerHeight: CGFloat = Constants.DefaultTitleHeight {
+    open var titleContainerHeight: CGFloat = Constants.DefaultTitleHeight {
         
         didSet {
             
@@ -50,7 +50,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var hidesSeparator: Bool = false {
+    open var hidesSeparator: Bool = false {
         
         didSet {
             
@@ -58,7 +58,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var bounces: Bool = true {
+    open var bounces: Bool = true {
         
         didSet {
             
@@ -66,7 +66,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var backgroundColor: UIColor = UIColor.white {
+    open var backgroundColor: UIColor = UIColor.white {
         
         didSet {
             
@@ -74,7 +74,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var extendEdgesUnderTitleBar: Bool = false {
+    open var extendEdgesUnderTitleBar: Bool = false {
         
         didSet {
             
@@ -82,7 +82,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var separatorColor: UIColor = UIColor.black {
+    open var separatorColor: UIColor = UIColor.black {
         
         didSet {
             
@@ -93,7 +93,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var selectionIndicatorColor: UIColor = UIColor.darkGray {
+    open var selectionIndicatorColor: UIColor = UIColor.darkGray {
         
         didSet {
             
@@ -101,7 +101,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var selectedBackgroundColor: UIColor = UIColor.lightGray {
+    open var selectedBackgroundColor: UIColor = UIColor.lightGray {
         
         didSet {
             
@@ -109,7 +109,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var unselectedBackgroundColor: UIColor = UIColor.white {
+    open var unselectedBackgroundColor: UIColor = UIColor.white {
         
         didSet {
             
@@ -117,7 +117,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var selectedFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize) {
+    open var selectedFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize) {
         
         didSet {
             
@@ -125,7 +125,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var unselectedFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize) {
+    open var unselectedFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize) {
         
         didSet {
             
@@ -133,7 +133,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var selectedFontColor: UIColor = UIColor.black {
+    open var selectedFontColor: UIColor = UIColor.black {
         
         didSet {
             
@@ -141,7 +141,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var unselectedFontColor: UIColor = UIColor.black {
+    open var unselectedFontColor: UIColor = UIColor.black {
         
         didSet {
             
@@ -149,18 +149,18 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var viewControllers: [UIViewController]? {
+    open var viewControllers: [UIViewController]? {
         
         didSet {
             
-            self.updateObserversForViewControllers(removeObservers: self.pageController?.viewControllers, addObservers: viewControllers)
+            self.updateObserversForViewControllers(self.pageController?.viewControllers, addObservers: viewControllers)
             
             self.pageController?.viewControllers = viewControllers
             self.updateTitles()
         }
     }
     
-    public var selectedIndex: Int {
+    open var selectedIndex: Int {
         
         get {
             
@@ -168,7 +168,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    public var initialIndex: Int? {
+    open var initialIndex: Int? {
         
         didSet {
             
@@ -184,7 +184,7 @@ public class PageMenuController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         self.parent?.automaticallyAdjustsScrollViewInsets = false
@@ -195,7 +195,7 @@ public class PageMenuController: UIViewController {
         self.addPageController()
     }
     
-    private func initializeInterface() {
+    fileprivate func initializeInterface() {
         
         self.updateTitleViewHeight()
         
@@ -203,7 +203,7 @@ public class PageMenuController: UIViewController {
         self.updateSeparatorHeight()
     }
     
-    private func updateTitleViewHeight() {
+    fileprivate func updateTitleViewHeight() {
          
         self.performViewUpdatesOnMainThread() {
             
@@ -211,7 +211,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    private func updateSeparatorHeight() {
+    fileprivate func updateSeparatorHeight() {
          
         self.performViewUpdatesOnMainThread() {
             
@@ -219,7 +219,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    private func updatePageContainerTopConstraint() {
+    fileprivate func updatePageContainerTopConstraint() {
         
         self.performViewUpdatesOnMainThread() {
             
@@ -228,7 +228,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    private func addPageTitleView() {
+    fileprivate func addPageTitleView() {
         
         if let pageTitleView = PageTitleView.pmc_viewFromNib() {
             
@@ -246,7 +246,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    private func addPageController() {
+    fileprivate func addPageController() {
         
         let pageController = PageController()
         
@@ -255,7 +255,7 @@ public class PageMenuController: UIViewController {
         
         pageController.delegate = self
         pageController.viewControllers = self.viewControllers
-        self.pmc_addChildViewController(viewController: pageController, inView: self.pageContainerView)
+        self.pmc_addChildViewController(pageController, inView: self.pageContainerView)
         
         pageController.view.snp_makeConstraints { (make) in
             
@@ -265,7 +265,7 @@ public class PageMenuController: UIViewController {
         self.pageController = pageController
     }
     
-    private func updateTitleViewInterface() {
+    fileprivate func updateTitleViewInterface() {
         
         self.pageTitleView?.selectionIndicatorColor = self.selectionIndicatorColor
         self.pageTitleView?.selectedBackgroundColor = self.selectedBackgroundColor
@@ -276,7 +276,7 @@ public class PageMenuController: UIViewController {
         self.pageTitleView?.unselectedFontColor = self.unselectedFontColor
     }
     
-    private func updateTitles() {
+    fileprivate func updateTitles() {
         
         var titles = [String]()
         
@@ -284,21 +284,21 @@ public class PageMenuController: UIViewController {
         self.pageTitleView?.titles = titles
     }
     
-    public func hideTopBar() {
+    open func hideTopBar() {
         
-        self.toggleTopBar(hide: true)
+        self.toggleTopBar(true)
     }
     
-    public func showTopBar() {
+    open func showTopBar() {
         
-        self.toggleTopBar(hide: false)
+        self.toggleTopBar(false)
     }
     
-    private func toggleTopBar(hide: Bool) {
+    fileprivate func toggleTopBar(_ hide: Bool) {
         
         UIView.animate(withDuration: Constants.DefaultAnimationDuration) {
             
-            self.delegate?.pageMenuControllerIsUpdatingBars(hide: hide)
+            self.delegate?.pageMenuControllerIsUpdatingBars(hide)
             
             if self.isViewLoaded {
                 
@@ -310,7 +310,7 @@ public class PageMenuController: UIViewController {
         }
     }
     
-    private func performViewUpdatesOnMainThread(block: @escaping (() -> Void)) {
+    fileprivate func performViewUpdatesOnMainThread(_ block: @escaping (() -> Void)) {
         
         if self.isViewLoaded {
              
@@ -327,21 +327,21 @@ public class PageMenuController: UIViewController {
 
 extension PageMenuController: PageControllerDelegate {
     
-    func pagingScrollViewDidScroll(scrollView: UIScrollView) {
+    func pagingScrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        self.pageTitleView?.didScrollToOffset(offset: scrollView.contentOffset.x, contentSize: scrollView.contentSize.width)
+        self.pageTitleView?.didScrollToOffset(scrollView.contentOffset.x, contentSize: scrollView.contentSize.width)
     }
     
-    func pagingScrollViewDidSelectViewController(controller: UIViewController, atIndex index: Int) {
+    func pagingScrollViewDidSelectViewController(_ controller: UIViewController, atIndex index: Int) {
         
-        self.delegate?.pageMenuDidSelectController(controller: controller, atIndex: index)
+        self.delegate?.pageMenuDidSelectController(controller, atIndex: index)
     }
 }
 
 extension PageMenuController: PageTitleViewDelegate {
     
-    func pageTitleViewDidSelectItemAtIndexPath(indexPath: NSIndexPath) {
+    func pageTitleViewDidSelectItemAtIndexPath(_ indexPath: IndexPath) {
         
-        self.pageController?.scrollToItemAtIndexPath(indexPath: indexPath)
+        self.pageController?.scrollToItemAtIndexPath(indexPath)
     }
 }

@@ -11,16 +11,16 @@ import UIKit
 
 enum ScrollDirection: Int {
     
-    case None
-    case Forwards
-    case Backwards
+    case none
+    case forwards
+    case backwards
 }
 
 extension PageController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        self.delegate?.pagingScrollViewDidScroll(scrollView: scrollView)
+        self.delegate?.pagingScrollViewDidScroll(scrollView)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -31,22 +31,22 @@ extension PageController: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
-        self.beginAppearanceTransitionForScrollView(scrollView: scrollView, targetOffset: targetContentOffset.pointee.x)
+        self.beginAppearanceTransitionForScrollView(scrollView, targetOffset: targetContentOffset.pointee.x)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
-        self.endAppearanceTransitionsForScrollView(scrollView: scrollView)
+        self.endAppearanceTransitionsForScrollView(scrollView)
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         
-        self.endAppearanceTransitionsForScrollView(scrollView: scrollView)
+        self.endAppearanceTransitionsForScrollView(scrollView)
     }
     
-    func beginAppearanceTransitionForScrollView(scrollView: UIScrollView, targetOffset: CGFloat) {
+    func beginAppearanceTransitionForScrollView(_ scrollView: UIScrollView, targetOffset: CGFloat) {
         
-        let currentIndex = self.calculateIndex(offset: targetOffset, scrollView: scrollView)
+        let currentIndex = self.calculateIndex(targetOffset, scrollView: scrollView)
         
         if let currentViewController = self.viewControllers?[safe: currentIndex],
             let previousController = self.viewControllers?[safe: self.selectedIndex], currentViewController != previousController {
@@ -59,10 +59,10 @@ extension PageController: UIScrollViewDelegate {
         }
     }
     
-    private func endAppearanceTransitionsForScrollView(scrollView: UIScrollView) {
+    fileprivate func endAppearanceTransitionsForScrollView(_ scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset.x
-        let currentIndex = self.calculateIndex(offset: offset, scrollView: scrollView)
+        let currentIndex = self.calculateIndex(offset, scrollView: scrollView)
         
         if let currentViewController = self.viewControllers?[safe: currentIndex],
             let previousController = self.viewControllers?[safe: self.selectedIndex], currentViewController != previousController {
@@ -75,19 +75,19 @@ extension PageController: UIScrollViewDelegate {
             
             self.selectedIndex = currentIndex
             
-            self.delegate?.pagingScrollViewDidSelectViewController(controller: currentViewController, atIndex: currentIndex)
+            self.delegate?.pagingScrollViewDidSelectViewController(currentViewController, atIndex: currentIndex)
         }
     }
     
-    private func calculateIndex(offset: CGFloat, scrollView: UIScrollView) -> Int {
+    fileprivate func calculateIndex(_ offset: CGFloat, scrollView: UIScrollView) -> Int {
         
-        let scrollDirection = self.calculateScrollDirection(offset: offset)
+        let scrollDirection = self.calculateScrollDirection(offset)
         let currentIndex: Int
         
-        if scrollDirection == .Forwards {
+        if scrollDirection == .forwards {
             
             currentIndex = Int(ceil(offset / scrollView.frame.width))
-        } else if scrollDirection == .Backwards {
+        } else if scrollDirection == .backwards {
             
             currentIndex = Int(floor(offset / scrollView.frame.width))
         } else {
@@ -98,16 +98,16 @@ extension PageController: UIScrollViewDelegate {
         return currentIndex
     }
     
-    private func calculateScrollDirection(offset: CGFloat) -> ScrollDirection {
+    fileprivate func calculateScrollDirection(_ offset: CGFloat) -> ScrollDirection {
         
-        var scrollDirection = ScrollDirection.None
+        var scrollDirection = ScrollDirection.none
         
         if (self.lastOffset > offset) {
             
-            scrollDirection = .Backwards
+            scrollDirection = .backwards
         } else if (self.lastOffset < offset) {
             
-            scrollDirection = .Forwards
+            scrollDirection = .forwards
         }
         
         self.lastOffset = offset
