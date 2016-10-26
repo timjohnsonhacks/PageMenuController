@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PageMenuController'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'An Android like navigation system, with a segmented control at the top, with the ability to scroll between view controllers fluidly.'
 
   s.description      = <<-DESC
