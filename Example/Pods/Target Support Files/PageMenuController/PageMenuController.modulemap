@@ -1,6 +1,0 @@
-framework module PageMenuController {
-  umbrella header "PageMenuController-umbrella.h"
-
-  export *
-  module * { export * }
-}
