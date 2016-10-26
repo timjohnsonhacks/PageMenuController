@@ -11,7 +11,7 @@ import UIKit
 
 extension UIView {
     
-    class func pmc_viewFromNib(nibNameOrNil: String? = nil) -> Self? {
+    class func pmc_viewFromNib(_ nibNameOrNil: String? = nil) -> Self? {
         
         return self.pmc_viewFromNib(nibNameOrNil: nibNameOrNil, type: self)
     }
