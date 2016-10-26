@@ -163,7 +163,7 @@ class PageController: UIViewController {
             viewController.automaticallyAdjustsScrollViewInsets = false
             viewController.view.translatesAutoresizingMaskIntoConstraints = false
             
-            viewController.view.snp_makeConstraints({ (make) in
+            viewController.view.snp.makeConstraints({ (make) in
                 
                 if self.pageType == .Horizontal {
                     
@@ -173,7 +173,7 @@ class PageController: UIViewController {
                     
                     if let previousController = previousController {
                         
-                        make.leading.equalTo(previousController.view.snp_trailing)
+                        make.leading.equalTo(previousController.view.snp.trailing)
                     }
                     
                     if viewControllers.first == viewController {
@@ -194,7 +194,7 @@ class PageController: UIViewController {
                     
                     if let previousController = previousController {
                         
-                        make.top.equalTo(previousController.view.snp_bottom)
+                        make.top.equalTo(previousController.view.snp.bottom)
                     }
                     
                     if viewControllers.first == viewController {

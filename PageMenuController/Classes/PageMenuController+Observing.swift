@@ -33,7 +33,7 @@ extension PageMenuController {
         viewController.removeObserver(self, forKeyPath: Constants.TitleKeyPath, context: &KVOContext)
     }
     
-    public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if let keyPath = keyPath,
             let viewController = object as? UIViewController,

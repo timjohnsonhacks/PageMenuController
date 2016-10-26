@@ -235,7 +235,7 @@ public class PageMenuController: UIViewController {
             pageTitleView.delegate = self
             self.titleContainerView.addSubview(pageTitleView)
             
-            pageTitleView.snp_makeConstraints({ (make) in
+            pageTitleView.snp.makeConstraints({ (make) in
                 
                 make.edges.equalTo(self.titleContainerView)
             })
@@ -257,7 +257,7 @@ public class PageMenuController: UIViewController {
         pageController.viewControllers = self.viewControllers
         self.pmc_addChildViewController(viewController: pageController, inView: self.pageContainerView)
         
-        pageController.view.snp_makeConstraints { (make) in
+        pageController.view.snp.makeConstraints { (make) in
             
             make.edges.equalTo(self.pageContainerView)
         }
