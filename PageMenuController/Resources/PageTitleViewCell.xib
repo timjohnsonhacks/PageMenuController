@@ -25,8 +25,7 @@
             </view>
             <constraints>
                 <constraint firstItem="iFN-Kk-QSU" firstAttribute="centerX" secondItem="iXr-n1-ljC" secondAttribute="centerX" id="0pB-f0-esx"/>
-                <constraint firstItem="iFN-Kk-QSU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iXr-n1-ljC" secondAttribute="top" constant="12" id="3kg-ca-mi1"/>
-                <constraint firstAttribute="bottom" secondItem="iFN-Kk-QSU" secondAttribute="bottom" constant="12" id="BFG-K6-Ahe"/>
+                <constraint firstItem="iFN-Kk-QSU" firstAttribute="centerX" secondItem="iXr-n1-ljC" secondAttribute="centerX" id="0pB-f0-esx"/>
             </constraints>
             <size key="customSize" width="317" height="50"/>
             <connections>
