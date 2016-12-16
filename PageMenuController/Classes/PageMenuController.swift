@@ -208,6 +208,7 @@ public class PageMenuController: UIViewController {
         self.performViewUpdatesOnMainThread() {
             
             self.titleContainerHeightConstraint.constant = self.titleContainerHeight
+            self.pageTitleView?.heightDidUpdate()
         }
     }
     

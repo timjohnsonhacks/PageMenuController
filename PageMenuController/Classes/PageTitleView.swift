@@ -171,6 +171,11 @@ class PageTitleView: UIView {
             }
         }
     }
+    
+    func heightDidUpdate() {
+        
+        self.collectionView.collectionViewLayout.invalidateLayout()
+    }
 }
 
 extension PageTitleView: UICollectionViewDataSource {
