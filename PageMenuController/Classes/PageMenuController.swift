@@ -40,7 +40,7 @@ public class PageMenuController: UIViewController {
     
     internal var KVOContext: UInt8 = 1
     
-    public var delegate: PageMenuControllerDelegate?
+    public weak var delegate: PageMenuControllerDelegate?
     
     public var titleContainerHeight: CGFloat = Constants.DefaultTitleHeight {
         
